@@ -1,9 +1,18 @@
 <h1 align="center">SIGA</h1>
 
-<div style="display: flex; align-items: center; gap: 20px;">
-  <img src="CODIGO%20PROYECTO/FRONTEND/src/assets/siga-logo.png" alt="SIGA Logo" width="100"/>
-  <p style="margin: 0; font-size: 1.2rem;"><strong>Sistema de Ingreso General Académico</strong></p>
+<div align="center">
+  <table>
+    <tr>
+      <td>
+        <img src="CODIGO%20PROYECTO/FRONTEND/src/assets/siga-logo.png" alt="SIGA Logo" width="150"/>
+      </td>
+      <td style="padding-left: 20px;">
+        <h2>Sistema de Ingreso General Académico</h2>
+      </td>
+    </tr>
+  </table>
 </div>
+
 
 ---
 
