@@ -1,11 +1,10 @@
-<p align="center">
-  <img src="CODIGO%20PROYECTO/FRONTEND/src/assets/siga-logo.png" alt="SIGA Logo" width="200"/>
-</p>
-
-
-
 <h1 align="center">SIGA</h1>
-<h3 align="center">Sistema de Ingreso General Académico</h3>
+
+<div align="left" style="display: flex; align-items: center; gap: 20px;">
+  <img src="CODIGO%20PROYECTO/FRONTEND/src/assets/siga-logo.png" alt="SIGA Logo" width="100"/>
+  <h3>Sistema de Ingreso General Académico</h3>
+</div>
+
 
 ---
 
