@@ -1,6 +1,8 @@
 <p align="center">
-  <img src="./CODIGO PROYECTO/assets/siga-logo.png" alt="SIGA Logo" width="200"/>
+  <img src="CODIGO%20PROYECTO/FRONTEND/src/assets/siga-logo.png" alt="SIGA Logo" width="200"/>
 </p>
+
+
 
 <h1 align="center">SIGA</h1>
 <h3 align="center">Sistema de Ingreso General Académico</h3>
