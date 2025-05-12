@@ -70,8 +70,8 @@ Route::get('/usuarios-disponibles-administrativos', [AuthController::class, 'usu
 
 //Rutas para asignaturas, clases, asistencia y aulas
 route::get('/crasignatura',[AsignaturaController::class, 'store']);
-route::get('/crclase',[ClaseController::class, 'store']);
-route::get('/crclasercr',[ClaseController::class, 'crearRecurrentes']);
+route::post('/crclase',[ClaseController::class, 'store']);
+route::post('/crclasercr',[ClaseController::class, 'crearRecurrentes']);
 Route::post('/marcarasistencia', [AsistenciaController::class, 'marcar']);
 Route::post('/aulas', [AulaController::class, 'store']);
 Route::get('/aulas', [AulaController::class, 'index']);
