@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\Clase;
+use App\Models\Clase;
 use Carbon\Carbon;
 
 class ClaseController extends Controller
@@ -12,10 +12,10 @@ class ClaseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'asignatura_id' => 'required|exists:asignatura,id',
-            'docente_id' => 'required|exists:docente,id',
-            'aula_id' => 'required|exists:aula,id',
-            'curso_id' => 'required|exists:curso,id',
+            'asignatura_id' => 'required|exists:asignaturas,id',
+            'docente_id' => 'required|exists:docentes,id',
+            'aula_id' => 'required|exists:aulas,id',
+            'curso_id' => 'required|exists:cursos,id',
             'fecha' => 'required|date',
             'hora_inicio' => 'required',
             'hora_fin' => 'required|after:hora_inicio',
@@ -30,10 +30,10 @@ class ClaseController extends Controller
     public function crearRecurrentes(Request $request)
     {
         $request->validate([
-            'asignatura_id' => 'required|exists:asignatura,id',
-            'docentes_id' => 'required|exists:docente,id',
-            'aula_id' => 'required|exists:aula,id',
-            'curso_id' => 'required|exists:curso,id',
+            'asignatura_id' => 'required|exists:asignaturas,id',
+            'docente_id' => 'required|exists:docentes,id',
+            'aula_id' => 'required|exists:aulas,id',
+            'curso_id' => 'required|exists:cursos,id',
             'hora_inicio' => 'required',
             'hora_fin' => 'required|after:hora_inicio',
             'fecha_inicio' => 'required|date',

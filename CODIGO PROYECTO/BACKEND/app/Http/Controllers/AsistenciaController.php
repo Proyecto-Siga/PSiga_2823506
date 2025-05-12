@@ -11,8 +11,8 @@ class AsistenciaController extends Controller
     public function marcar(Request $request)
     {
         $request->validate([
-            'clase_id' => 'required|exists:clase,id',
-            'estudiante_id' => 'required|exists:estudiante,id',
+            'clase_id' => 'required|exists:clases,id',
+            'estudiante_id' => 'required|exists:estudiantes,id',
             'estado' => 'required',
         ]);
 
