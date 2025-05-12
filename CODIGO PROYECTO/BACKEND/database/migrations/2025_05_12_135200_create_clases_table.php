@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('asignatura_id')->constrained('asignaturas');           
             $table->foreignId('docente_id')->constrained('docentes');
-            $table->foreignId('aula_id')->constrained('aula');
+            $table->foreignId('aula_id')->constrained('aulas');
             $table->foreignId('curso_id')->constrained('cursos');
             
             $table->date('fecha');
