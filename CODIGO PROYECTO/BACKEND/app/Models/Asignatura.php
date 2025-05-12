@@ -10,7 +10,7 @@ class Asignatura extends Model
 
     protected $fillable = ['nombre_asignatura'];
     
-    public function usuarios()
+    public function clases()
     {
     return $this->hasMany(Clase::class);
     }
