@@ -434,3 +434,11 @@
 [stacktrace]
 #0 {main}
 "} 
+[2025-05-12 18:21:19] local.ERROR: Trait "App\Models\HasFactory" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"App\\Models\\HasFactory\" not found at C:\\xampp\\htdocs\\Repositorio_Grupal\\PSiga_2823506\\CODIGO PROYECTO\\BACKEND\\app\\Models\\Asignatura.php:7)
+[stacktrace]
+#0 {main}
+"} 
+[2025-05-12 18:22:02] local.ERROR: Trait "App\Models\HasFactory" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"App\\Models\\HasFactory\" not found at C:\\xampp\\htdocs\\Repositorio_Grupal\\PSiga_2823506\\CODIGO PROYECTO\\BACKEND\\app\\Models\\Asignatura.php:7)
+[stacktrace]
+#0 {main}
+"} 
