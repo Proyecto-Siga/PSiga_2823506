@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -13,6 +14,15 @@ return new class extends Migration
     {
         Schema::create('clases', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('asignatura_id')->constrained('asignaturas');           
+            $table->foreignId('docente_id')->constrained('docentes');
+            $table->foreignId('aula_id')->constrained('aula');
+            $table->foreignId('curso_id')->constrained('cursos');
+            
+            $table->date('fecha');
+            $table->time('hora_inicio');
+            $table->time('hora_fin');
+            
             $table->timestamps();
         });
     }
