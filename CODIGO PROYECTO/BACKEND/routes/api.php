@@ -7,6 +7,10 @@ use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\AdministrativoController;
+use App\Http\Controllers\AsignaturaController;
+use App\Http\Controllers\ClaseController;
+use App\Http\Controllers\AsistenciaController;
+use App\Http\Controllers\AulaController;
 use Illuminate\Support\Facades\Route;
 
 // Rutas para roles
