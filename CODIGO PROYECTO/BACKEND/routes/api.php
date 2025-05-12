@@ -73,7 +73,7 @@ Route::delete('/administrativos/{id}', [AdministrativoController::class, 'destro
 Route::get('/usuarios-disponibles-administrativos', [AuthController::class, 'usuariosDisponiblesAdministrativos']);
 
 //Rutas para asignaturas, clases, asistencia y aulas
-route::get('/crasignatura',[AsignaturaController::class, 'store']);
+route::post('/crasignatura',[AsignaturaController::class, 'store']);
 route::post('/crclase',[ClaseController::class, 'store']);
 route::post('/crclasercr',[ClaseController::class, 'crearRecurrentes']);
 Route::post('/marcarasistencia', [AsistenciaController::class, 'marcar']);
