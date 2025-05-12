@@ -8,7 +8,7 @@ class Asignatura extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre_aula'];
+    protected $fillable = ['nombre_asignatura'];
     
     public function usuarios()
     {
