@@ -21,11 +21,11 @@ class Clase extends Model
         'hora_fin',
     ];
 
-    protected function asignatura(){
+    protected function asignaturas(){
         return $this->belongsTo(Asignatura::class);
     }
 
-    public function docente() {
+    public function docentes() {
         return $this->belongsTo(Docente::class, 'docente_id');
     }
 
@@ -33,7 +33,7 @@ class Clase extends Model
         return $this->belongsTo(Curso::class, 'curso_id');
     }
 
-    public function aula() {
+    public function aulas() {
         return $this->belongsTo(Aula::class);
     }
 

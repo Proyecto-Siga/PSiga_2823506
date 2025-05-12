@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Asignatura extends Model
 {
     use HasFactory;
-
+    protected $table = 'asignaturas';
     protected $fillable = ['nombre_asignatura'];
     
     public function clases()
