@@ -62,12 +62,9 @@ const Login = () => {
             imageWidth: 100,
             imageHeight: 100,
             imageAlt: 'Logo SIGA',
-            confirmButtonText: 'Entrar al sistema',
-            customClass: {
-              confirmButton: 'btn btn-success',
-              popup: 'p-4 rounded-4 shadow',
-            },
-            buttonsStyling: false,
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true
           }).then(() => {
             navigate(ruta);
           });

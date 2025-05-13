@@ -59,27 +59,41 @@ function Administrativo() {
           <h3>Admin Panel</h3>
         </div>
 
-        <button onClick={() => setSeccionActiva("rol")}>
+        <button onClick={() => setSeccionActiva("rol")}
+        className={seccionActiva === "rol" ? "active":""}>
           <FaShieldAlt /> Rol
         </button>
-        <button onClick={() => setSeccionActiva("usuario")}>
+
+        <button onClick={() => setSeccionActiva("usuario")}
+        className={seccionActiva === "usuario" ? "active":""}>
           <FaUser /> Usuario
         </button>
-        <button onClick={() => setSeccionActiva("docente")}>
+
+        <button onClick={() => setSeccionActiva("docente")}
+        className={seccionActiva === "docente" ? "active":""}>
           <FaChalkboardTeacher /> Docente
         </button>
-        <button onClick={() => setSeccionActiva("acudiente")}>
+
+        <button onClick={() => setSeccionActiva("acudiente")}
+        className={seccionActiva === "acudiente" ? "active":""}>
           <FaUsers /> Acudiente
         </button>
-        <button onClick={() => setSeccionActiva("curso")}>
+
+        <button onClick={() => setSeccionActiva("curso")}
+        className={seccionActiva === "curso" ? "active":""}>
           <FaSchool /> Curso
         </button>
-        <button onClick={() => setSeccionActiva("estudiante")}>
+
+        <button onClick={() => setSeccionActiva("estudiante")}
+        className={seccionActiva === "estudiante" ? "active":""}>
           <FaUserGraduate /> Estudiante
         </button>
-        <button onClick={() => setSeccionActiva("administrativo")}>
+
+        <button onClick={() => setSeccionActiva("administrativo")}
+        className={seccionActiva === "administrativo" ? "active":""}>
           <FaFolderOpen /> Administrativo
         </button>
+        
         <button onClick={handleLogout} className="logout-button">
           <FaSignOutAlt /> Cerrar sesión
         </button>
