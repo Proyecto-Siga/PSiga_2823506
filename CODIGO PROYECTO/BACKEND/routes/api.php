@@ -80,5 +80,11 @@ Route::post('/marcarasistencia', [AsistenciaController::class, 'marcar']);
 Route::post('/aulas', [AulaController::class, 'store']);
 Route::get('/aulas', [AulaController::class, 'index']);
 
+//rutas para aulas
+Route::post('/registrar-aulas', [AulaController::class, 'registrar']);
+Route::get('/obtener-aulas', [AulaController::class, 'index']);
+Route::put('/actualizar-aulas/{id}', [AulaController::class, 'update']);
+Route::patch('/actualizar-parcial-aulas/{id}', [AulaController::class, 'updatePartial']);
+Route::delete('/eliminar-aulas/{id}', [AulaController::class, 'destroy']);
 
 
