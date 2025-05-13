@@ -87,4 +87,6 @@ Route::put('/actualizar-aulas/{id}', [AulaController::class, 'update']);
 Route::patch('/actualizar-parcial-aulas/{id}', [AulaController::class, 'updatePartial']);
 Route::delete('/eliminar-aulas/{id}', [AulaController::class, 'destroy']);
 
+Route::post('/registrar-clases', [ClaseController::class, 'registrar']); 
+
 
