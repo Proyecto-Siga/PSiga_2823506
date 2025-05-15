@@ -6,9 +6,9 @@ import {
   FaSignOutAlt,
 } from "react-icons/fa";
 import "./Docente.css";
-// import Clases from "./Clases";
-// import Asistencia from "./Asistencia";
-// import Reporte from "./Reporte";
+import Clases from "./CrudClases";
+import Asistencia from "./Asistencia";
+import Reporte from "./Reporte";
 import logo from '../assets/siga-logo.png';
 
 function Docente() {
@@ -19,18 +19,18 @@ function Docente() {
     window.location.href = "/";
   };
 
-//   const renderSeccion = () => {
-//     switch (seccionActiva) {
-//       case "clases":
-//         return <Clases />;
-//       case "asistencia":
-//         return <Asistencia />;
-//       case "reporte":
-//         return <Reporte />;
-//       default:
-//         return <h2>Seleccione una sección</h2>;
-//     }
-//   };
+  const renderSeccion = () => {
+    switch (seccionActiva) {
+      case "clases":
+        return <Clases />;
+      case "asistencia":
+        return <Asistencia />;
+      case "reporte":
+        return <Reporte />;
+      default:
+        return <h2>Seleccione una sección</h2>;
+    }
+  };
 
   return (
     <div className="docente-container">
@@ -73,9 +73,9 @@ function Docente() {
         </button>
       </div>
 
-      {/* <div className="main-content">
+      <div className="main-content">
         {renderSeccion()}
-      </div> */}
+      </div>
     </div>
   );
 }
