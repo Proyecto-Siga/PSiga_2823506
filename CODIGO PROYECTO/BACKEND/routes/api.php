@@ -94,3 +94,5 @@ Route::patch('/actualizar-parcial-clases/{id}', [ClaseController::class, 'update
 Route::delete('/eliminar-clases/{id}', [ClaseController::class, 'destroy']);
 
 //rutas para asistencia
+Route::post('/marcar-asistencia', [AsistenciaController::class, 'registrar']); 
+
