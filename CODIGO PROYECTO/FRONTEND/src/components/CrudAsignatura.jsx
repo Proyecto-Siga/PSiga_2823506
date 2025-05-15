@@ -73,19 +73,19 @@ const CrudAsignatura = () => {
       <h2>Gestión de Asignaturas</h2>
 
       <div className="formulario">
-        <input
+        <input className="Registro-asignatura"
           type="text"
           placeholder="Nombre asignatura"
           value={nuevoNombre}
           onChange={(e) => setNuevoNombre(e.target.value)}
         />
         {editandoId ? (
-          <button onClick={handleActualizar}>Actualizar</button>
+          <button className="boton-asignatura" onClick={handleActualizar}>Actualizar</button>
         ) : (
-          <button onClick={handleRegistrar}>Registrar</button>
+          <button className="boton-asignatura" onClick={handleRegistrar}>Registrar</button>
         )}
         {editandoId && (
-          <button onClick={() => {
+          <button className="boton-asignatura" onClick={() => {
             setEditandoId(null);
             setNuevoNombre("");
           }}>Cancelar</button>
