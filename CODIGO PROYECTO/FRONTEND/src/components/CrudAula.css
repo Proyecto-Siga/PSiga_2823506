@@ -1,26 +1,20 @@
-.crud-asignatura-container {
+.crud-aula-container {
   padding: 20px;
   background-color: #f5f9fa;
   height: 100vh;
   box-sizing: border-box;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
-.crud-asignatura-container h2 {
+.crud-aula-container h2 {
   margin-bottom: 20px;
   color: #333;
+  text-align: center;
 }
 
-.asignatura-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-}
 
-.formulario {
+.formulario-aula {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,37 +23,41 @@
   flex-wrap: wrap;
 }
 
-.Registro-asignatura {
+.registro-aula {
   padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
   min-width: 200px;
-  flex: 1;
   font-size: 14px;
   outline: none;
   transition: border-color 0.3s ease;
 }
 
-.asignatura-form input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 3px rgba(0, 123, 255, 0.3);
-}
-
-.asignatura-form button {
+.boton-aula {
   background-color: #007bff;
   color: white;
   padding: 8px 16px;
   border: none;
   border-radius: 6px;
+  font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.asignatura-form button:hover {
+.boton-aula:hover {
   background-color: #0056b3;
 }
 
-.asignatura-table-container {
+.boton-cancelar-aula {
+  background-color: #6c757d;
+}
+
+.boton-cancelar-aula:hover {
+  background-color: #5a6268;
+}
+
+
+.aula-table-container {
   flex-grow: 1;
   overflow-y: auto;
   overflow-x: auto;
@@ -68,13 +66,13 @@
   background-color: #fff;
 }
 
-.asignatura-table {
+.aula-table {
   width: 100%;
   border-collapse: collapse;
   min-width: 400px;
 }
 
-.asignatura-table thead th {
+.aula-table thead th {
   position: sticky;
   top: 0;
   z-index: 10;
@@ -86,19 +84,10 @@
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
 }
 
-.asignatura-table td {
+.aula-table td {
   padding: 10px;
   border-bottom: 1px solid #dee2e6;
   white-space: nowrap;
-}
-
-.asignatura-table input {
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .edit-btn,
