@@ -109,6 +109,7 @@ class AsignaturaController extends Controller
     }
 
         public function destroy($id) {
+            
         $asignatura = Asignatura::find($id);
     
         if (!$asignatura) {
@@ -119,7 +120,7 @@ class AsignaturaController extends Controller
             return response()->json($data, 404);
         }
     
-        $curso->delete();
+        $asignatura->delete();
     
         $data = [
             'mensaje' => 'Asignatura eliminada con exito',
