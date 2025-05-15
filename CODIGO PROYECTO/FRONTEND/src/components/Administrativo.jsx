@@ -8,7 +8,8 @@ import {
   FaUserGraduate,
   FaFolderOpen,
   FaSignOutAlt,
-  FaDoorOpen
+  FaDoorOpen,
+  FaBook
 } from "react-icons/fa";
 import "./Administrativo.css";
 import CrudRol from "./CrudRol";
@@ -18,6 +19,7 @@ import CrudCurso from "./CrudCurso";
 import CrudUsuario from "./CrudUsuario";
 import CrudDocente from "./CrudDocente";
 import CrudAula from "./CrudAula";
+import CrudAsignatura from "./CrudAsignatura";
 import CrudAdministrativo from "./CrudAdministrativo";
 import logo from "../assets/siga-logo.png";
 
@@ -30,27 +32,28 @@ function Administrativo() {
   };
 
   const renderSeccion = () => {
-   switch (seccionActiva) {
-  case "rol":
-    return <CrudRol />;
-  case "usuario":
-    return <CrudUsuario />;
-  case "docente":
-    return <CrudDocente />;     
-  case "aula":
-    return <CrudAula />;        
-  case "acudiente":
-    return <CrudAcudiente />;
-  case "curso":
-    return <CrudCurso />;
-  case "estudiante":
-    return <CrudEstudiante />;
-  case "administrativo":
-    return <CrudAdministrativo />;
-  default:
-    return <h2>Seleccione una sección</h2>;
-}
-
+    switch (seccionActiva) {
+      case "rol":
+        return <CrudRol />;
+      case "usuario":
+        return <CrudUsuario />;
+      case "docente":
+        return <CrudDocente />;
+      case "aula":
+        return <CrudAula />;
+      case "asignatura":
+        return <CrudAsignatura />;
+      case "acudiente":
+        return <CrudAcudiente />;
+      case "curso":
+        return <CrudCurso />;
+      case "estudiante":
+        return <CrudEstudiante />;
+      case "administrativo":
+        return <CrudAdministrativo />;
+      default:
+        return <h2>Seleccione una sección</h2>;
+    }
   };
 
   return (
@@ -87,6 +90,13 @@ function Administrativo() {
           className={seccionActiva === "aula" ? "active" : ""}
         >
           <FaDoorOpen /> Aula
+        </button>
+
+        <button
+          onClick={() => setSeccionActiva("asignatura")}
+          className={seccionActiva === "asignatura" ? "active" : ""}
+        >
+          <FaBook /> Asignatura
         </button>
 
         <button
