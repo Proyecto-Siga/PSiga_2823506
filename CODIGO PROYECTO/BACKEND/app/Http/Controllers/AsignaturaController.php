@@ -10,16 +10,16 @@ class AsignaturaController extends Controller
 {
     public function registrar (Request $request)
     {
-     
+    
         $validator = Validator::make($request->all(), [
-            'nombre_asignatura' => 'required'|'string|unique:asignaturas,nombre_asignatura',
+            'nombre_asignatura' => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        // Crear el rol
+        // Crear la asignatura
         $asignatura = Asignatura::create([
             'nombre_asignatura' => $request->nombre_asignatura,
         ]);

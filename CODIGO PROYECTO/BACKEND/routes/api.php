@@ -72,14 +72,6 @@ Route::put('/administrativos/{id}', [AdministrativoController::class, 'update'])
 Route::delete('/administrativos/{id}', [AdministrativoController::class, 'destroy']);
 Route::get('/usuarios-disponibles-administrativos', [AuthController::class, 'usuariosDisponiblesAdministrativos']);
 
-//Rutas para asignaturas, clases, asistencia y aulas
-route::post('/crasignatura',[AsignaturaController::class, 'store']);
-route::post('/crclase',[ClaseController::class, 'store']);
-route::post('/crclasercr',[ClaseController::class, 'crearRecurrentes']);
-Route::post('/marcarasistencia', [AsistenciaController::class, 'marcar']);
-Route::post('/aulas', [AulaController::class, 'store']);
-Route::get('/aulas', [AulaController::class, 'index']);
-
 //rutas para aulas
 Route::post('/registrar-aulas', [AulaController::class, 'registrar']);
 Route::get('/obtener-aulas', [AulaController::class, 'index']);
@@ -87,6 +79,18 @@ Route::put('/actualizar-aulas/{id}', [AulaController::class, 'update']);
 Route::patch('/actualizar-parcial-aulas/{id}', [AulaController::class, 'updatePartial']);
 Route::delete('/eliminar-aulas/{id}', [AulaController::class, 'destroy']);
 
+//rutas para asignatura 
+Route::post('/registrar-asignaturas', [AsignaturaController::class, 'registrar']);
+Route::get('/obtener-asignaturas', [AsignaturaController::class, 'index']);
+Route::put('/actualizar-asignaturas/{id}', [AsignaturaController::class, 'update']);
+Route::patch('/actualizar-parcial-asignaturas/{id}', [AsignaturaController::class, 'updatePartial']);
+Route::delete('/eliminar-asignaturas/{id}', [AsignaturaController::class, 'destroy']);
+
+//rutas para clases
 Route::post('/registrar-clases', [ClaseController::class, 'registrar']); 
+Route::get('/obtener-clases', [ClaseController::class, 'index']);
+Route::put('/actualizar-clases/{id}', [ClaseController::class, 'update']);
+Route::patch('/actualizar-parcial-clases/{id}', [ClaseController::class, 'updatePartial']);
+Route::delete('/eliminar-clases/{id}', [ClaseController::class, 'destroy']);
 
-
+//rutas para asistencia
