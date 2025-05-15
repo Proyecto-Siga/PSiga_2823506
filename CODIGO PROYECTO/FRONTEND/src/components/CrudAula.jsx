@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getAulas, createAula, updateAula, deleteAula } from '../services/aulaService';
+import "./CrudAula";
 
 const AulaCrud = () => {
   const [aulas, setAulas] = useState([]);

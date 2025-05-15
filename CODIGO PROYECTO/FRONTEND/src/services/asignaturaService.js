@@ -1,26 +1,19 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8000/api/asignaturas";
+const API_URL = "http://localhost:8000/api"; // Asegúrate que esta sea tu URL correcta
 
-const obtenerAsignaturas = () => {
-  return axios.get(API_URL);
+export const getAsignatura = () => {
+  return axios.get(`${API_URL}/obtener-asignaturas`);
 };
 
-const registrarAsignatura = (asignatura) => {
-  return axios.post(API_URL, asignatura);
+export const createAsignatura = (asignatura) => {
+  return axios.post(`${API_URL}/registrar-asignaturas`, asignatura);
 };
 
-const actualizarAsignatura = (id, asignatura) => {
-  return axios.put(`${API_URL}/${id}`, asignatura);
+export const updateAsignatura = (id, asignatura) => {
+  return axios.put(`${API_URL}/actualizar-asignaturas/${id}`, asignatura);
 };
 
-const eliminarAsignatura = (id) => {
-  return axios.delete(`${API_URL}/${id}`);
-};
-
-export {
-  obtenerAsignaturas,
-  registrarAsignatura,
-  actualizarAsignatura,
-  eliminarAsignatura,
+export const deleteAsignatura = (id) => {
+  return axios.delete(`${API_URL}/eliminar-asignaturas/${id}`);
 };
