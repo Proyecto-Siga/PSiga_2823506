@@ -9,7 +9,7 @@ class Acudiente extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'apellido'];
+    protected $fillable = ['nombre', 'apellido', 'correo'];
 
 
     public function estudiantes()
