@@ -33,4 +33,10 @@ class AsistenciaController extends Controller
 
         return response()->json(['message' => 'Asistencia registrada', 'asistencia' => $asistencia]);
     }
+
+    public function obtenerPorClase($clase_id)
+{
+    $asistencias = Asistencia::with('estudiante')->where('clase_id', $clase_id)->get();
+    return response()->json(['asistencias' => $asistencias]);
+}
 }

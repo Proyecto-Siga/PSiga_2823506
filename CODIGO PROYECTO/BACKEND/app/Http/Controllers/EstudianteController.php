@@ -155,4 +155,10 @@ class EstudianteController extends Controller
         ];
         return response()->json($data, 200);
     }
+
+    public function obtenerPorCurso($curso_id)
+{
+    $estudiantes = Estudiante::where('curso_id', $curso_id)->get();
+    return response()->json(['estudiantes' => $estudiantes]);
+}
 }

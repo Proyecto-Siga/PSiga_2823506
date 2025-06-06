@@ -17,15 +17,15 @@ class Usuario extends Authenticatable implements JWTSubject
     protected $fillable = ['rol_id','estado','correo','password'];
     protected $hidden = ['password'];
 
-    protected function rol(){
+    public function rol(){
         return $this->belongsTo(Rol::class);
     }
 
-    protected function docente(){
+    public function docente(){
         return $this->hasOne(Docente::class);
     }
 
-    protected function administrativo(){
+    public function administrativo(){
         return $this->hasOne(Administrativo::class);
     }
     

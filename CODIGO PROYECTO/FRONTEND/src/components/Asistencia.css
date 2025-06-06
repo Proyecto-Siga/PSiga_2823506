@@ -1,0 +1,21 @@
+.asistencia-container {
+  padding: 20px;
+}
+
+.filtros-asistencia {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.filtros-asistencia input,
+.filtros-asistencia select,
+.filtros-asistencia button {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.resultados-asistencia {
+  margin-top: 20px;
+}

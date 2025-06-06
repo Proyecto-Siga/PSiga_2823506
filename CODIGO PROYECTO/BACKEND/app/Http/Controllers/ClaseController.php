@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ClaseController extends Controller
 {
@@ -187,5 +188,30 @@ class ClaseController extends Controller
             'mensaje' => 'Clase eliminada correctamente',
             'status'  => 200
         ]);
+    }
+
+    public function obtenerClaseDocente(Request $request)
+        {
+    $request->validate([
+        'fecha' => 'required|date',
+        'curso_id' => 'required|exists:cursos,id',
+        'asignatura_id' => 'required|exists:asignaturas,id',
+    ]);
+
+    $user = auth()->user(); // el usuario logueado
+    $docenteId = $user->docente?->id;
+
+    $clase = Clase::where('fecha', $request->fecha)
+        ->where('curso_id', $request->curso_id)
+        ->where('asignatura_id', $request->asignatura_id)
+        ->where('docente_id', $docenteId)
+        ->first();
+
+    if (!$clase) {
+        return response()->json(['mensaje' => 'Clase no encontrada'], 404);
+    }
+
+    return response()->json(['clase' => $clase], 200);
+        
     }
 }

@@ -40,6 +40,7 @@ Route::get('/obtener-estudiantes', [EstudianteController::class, 'index']);
 Route::put('/actualizar-estudiantes/{id}', [EstudianteController::class, 'update']);
 Route::patch('/actualizar-parcial-estudiantes/{id}', [EstudianteController::class, 'updatePartial']);
 Route::delete('/eliminar-estudiantes/{id}', [EstudianteController::class, 'destroy']);
+Route::get('/estudiantes-curso/{curso_id}', [EstudianteController::class, 'obtenerPorCurso']);
 
 // Rutas para autenticación (usuarios que se logean)
 Route::post('/registrar-usuario', [AuthController::class, 'registrar']);
@@ -92,7 +93,9 @@ Route::get('/obtener-clases', [ClaseController::class, 'index']);
 Route::put('/actualizar-clases/{id}', [ClaseController::class, 'update']);
 Route::patch('/actualizar-parcial-clases/{id}', [ClaseController::class, 'updatePartial']);
 Route::delete('/eliminar-clases/{id}', [ClaseController::class, 'destroy']);
+Route::get('/clases-docente', [ClaseController::class, 'obtenerClaseDocente']);
 
 //rutas para asistencia
 Route::post('/marcar-asistencia', [AsistenciaController::class, 'registrar']); 
+Route::get('/asistencias/{clase_id}', [AsistenciaController::class, 'obtenerPorClase']);
 
