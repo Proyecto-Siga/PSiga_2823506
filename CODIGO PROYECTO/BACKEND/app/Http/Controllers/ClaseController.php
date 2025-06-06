@@ -13,7 +13,8 @@ class ClaseController extends Controller
 {
     public function index()
     {
-        $clases = Clase::all();
+        $clases = Clase::with('curso')->get();
+
 
         return response()->json([
             'clases' => $clases,
@@ -214,4 +215,24 @@ class ClaseController extends Controller
     return response()->json(['clase' => $clase], 200);
         
     }
+    public function clasesDelDia(Request $request)
+{
+    $fecha = $request->input('fecha');
+    $usuario = auth()->user();
+
+    if (!$usuario || !$usuario->docente) {
+        return response()->json(['error' => 'No se encontró el docente asociado.'], 403);
+    }
+
+    $docenteId = $usuario->docente->id;
+
+    $clases = Clase::where('fecha', $fecha)
+        ->where('docente_id', $docenteId)
+        ->with(['curso', 'asignatura'])
+        ->get();
+
+    return response()->json(['clases' => $clases]);
 }
+
+}
+
