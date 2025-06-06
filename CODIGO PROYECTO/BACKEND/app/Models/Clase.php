@@ -21,23 +21,24 @@ class Clase extends Model
         'hora_fin',
     ];
 
-    protected function asignaturas(){
+    // Relaciones
+
+    public function asignatura() {
         return $this->belongsTo(Asignatura::class);
     }
 
-    public function docentes() {
+    public function docente() {
         return $this->belongsTo(Docente::class, 'docente_id');
     }
 
-    public function cursos() {
-        return $this->belongsTo(Curso::class, 'curso_id');
-    }
+    
 
-    public function aulas() {
-        return $this->belongsTo(Aula::class);
+    public function aula() {
+        return $this->belongsTo(Aula::class, 'aula_id');
     }
+    public function curso()
+{
+    return $this->belongsTo(Curso::class);
+}
 
-    public function asistencias() {
-        return $this->hasMany(Asistencia::class, 'asistencia_id');
-    }
 }
