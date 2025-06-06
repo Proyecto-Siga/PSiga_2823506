@@ -98,4 +98,7 @@ Route::get('/clases-docente', [ClaseController::class, 'obtenerClaseDocente']);
 //rutas para asistencia
 Route::post('/marcar-asistencia', [AsistenciaController::class, 'registrar']); 
 Route::get('/asistencias/{clase_id}', [AsistenciaController::class, 'obtenerPorClase']);
+Route::get('/clases-del-dia', [ClaseController::class, 'clasesDelDia']);
+
+
 
