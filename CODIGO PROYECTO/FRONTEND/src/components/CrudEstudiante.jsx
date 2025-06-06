@@ -93,7 +93,7 @@ function CrudEstudiante() {
     const acudiente = acudientes.find((a) => a.id === e.acudiente_id);
     const acudienteNombre = acudiente ? `${acudiente.nombre} ${acudiente.apellido}`.toLowerCase() : "";
     const acudienteMatch = acudienteNombre.includes(filtroAcudiente.toLowerCase());
-    const cursoMatch = filtroCurso === "" || e.curso_id == filtroCurso;
+    const cursoMatch = filtroCurso === "" || e.curso_id === filtroCurso;
     return apellidoMatch && acudienteMatch && cursoMatch;
   });
 
