@@ -81,32 +81,35 @@ const AulaCrud = () => {
       <h2>{editId ? "Editar Aula" : "Registrar Aula"}</h2>
 
       <form className="formulario-aula" onSubmit={handleSubmit}>
-  <input
-    className="registro-aula"
-    type="text"
-    name="nombre_aula"
-    value={formData.nombre_aula}
-    onChange={handleChange}
-    placeholder="Nombre del aula"
-    required
-  />
-  <button className="boton-aula" type="submit">
-    {editId ? "Actualizar" : "Registrar"}
-  </button>
-  {editId && (
-    <button
-      className="boton-aula boton-cancelar-aula"
-      type="button"
-      onClick={() => {
-        setFormData({ nombre_aula: "" });
-        setEditId(null);
-      }}
-    >
-      Cancelar
-    </button>
-  )}
-</form>
-
+        <div className="grupo-input-botones">
+          <div className="input-wrapper">
+            <input
+              className="registro-aula"
+              type="text"
+              name="nombre_aula"
+              value={formData.nombre_aula}
+              onChange={handleChange}
+              placeholder="Nombre del aula"
+              required
+            />
+          </div>
+          <button className="boton-aula" type="submit">
+            {editId ? "Actualizar" : "Registrar"}
+          </button>
+          {editId && (
+            <button
+              className="boton-aula boton-cancelar-aula"
+              type="button"
+              onClick={() => {
+                setFormData({ nombre_aula: "" });
+                setEditId(null);
+              }}
+            >
+              Cancelar
+            </button>
+          )}
+        </div>
+      </form>
 
       <div className="aula-table-container">
         <table className="aula-table">
