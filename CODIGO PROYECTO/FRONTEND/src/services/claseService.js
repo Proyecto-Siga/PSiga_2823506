@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 const API = 'http://localhost:8000/api';
 
 export const getClases = () => axios.get(`${API}/obtener-clases`);
