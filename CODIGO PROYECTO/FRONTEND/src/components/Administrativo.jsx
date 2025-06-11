@@ -16,7 +16,7 @@ import CrudRol from "./CrudRol";
 import CrudAcudiente from "./CrudAcudiente";
 import CrudEstudiante from "./CrudEstudiante";
 import CrudCurso from "./CrudCurso";
-import CrudClases from "./CrudClases";
+import CrudClasesAdmin from "./CrudClasesAdmin";
 import CrudUsuario from "./CrudUsuario";
 import CrudDocente from "./CrudDocente";
 import CrudAula from "./CrudAula";
@@ -45,7 +45,7 @@ function Administrativo() {
       case "asignatura":
         return <CrudAsignatura />;
       case "clases":
-        return <CrudClases />;
+        return <CrudClasesAdmin />;
       case "acudiente":
         return <CrudAcudiente />;
       case "curso":
