@@ -9,13 +9,14 @@ import {
   FaFolderOpen,
   FaSignOutAlt,
   FaDoorOpen,
-  FaBook
+  FaBook,
 } from "react-icons/fa";
 import "./Administrativo.css";
 import CrudRol from "./CrudRol";
 import CrudAcudiente from "./CrudAcudiente";
 import CrudEstudiante from "./CrudEstudiante";
 import CrudCurso from "./CrudCurso";
+import CrudClases from "./CrudClases";
 import CrudUsuario from "./CrudUsuario";
 import CrudDocente from "./CrudDocente";
 import CrudAula from "./CrudAula";
@@ -43,6 +44,8 @@ function Administrativo() {
         return <CrudAula />;
       case "asignatura":
         return <CrudAsignatura />;
+      case "clases":
+        return <CrudClases />;
       case "acudiente":
         return <CrudAcudiente />;
       case "curso":
@@ -97,6 +100,13 @@ function Administrativo() {
           className={seccionActiva === "asignatura" ? "active" : ""}
         >
           <FaBook /> Asignatura
+        </button>
+
+        <button
+          onClick={() => setSeccionActiva("clases")}
+          className={seccionActiva === "clases" ? "active" : ""}
+        >
+          <FaChalkboardTeacher /> Clases
         </button>
 
         <button
