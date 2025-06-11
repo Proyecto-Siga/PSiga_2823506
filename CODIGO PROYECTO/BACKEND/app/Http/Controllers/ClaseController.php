@@ -13,7 +13,7 @@ class ClaseController extends Controller
 {
     public function index()
     {
-        $clases = Clase::with('curso')->get();
+        $clases = Clase::with('docente','curso', 'asignatura')->get();
 
 
         return response()->json([
