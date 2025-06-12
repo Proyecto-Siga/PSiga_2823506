@@ -299,7 +299,7 @@ const CrudClasesAdmin = () => {
           </>
         )}
 
-        <div style={{ marginTop: "10px" }}>
+        <div>
           <button type="submit" style={{ marginRight: "10px" }}>
             {form.id ? "Actualizar Clase" : "Registrar Clase"}
           </button>
@@ -308,7 +308,6 @@ const CrudClasesAdmin = () => {
             <button
               type="button"
               onClick={resetForm}
-              style={{ backgroundColor: "#ccc" }}
             >
               Cancelar edición
             </button>
