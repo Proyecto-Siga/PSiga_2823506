@@ -17,9 +17,9 @@ const CrudClasesAdmin = () => {
     curso_id: "",
     hora_inicio: "",
     hora_fin: "",
-    fecha: "", // solo para editar
-    fecha_inicio: "", // solo para registrar
-    fecha_fin: "", // solo para registrar
+    fecha: "",
+    fecha_inicio: "",
+    fecha_fin: "",
     dias: [],
     id: null,
   });
@@ -29,10 +29,25 @@ const CrudClasesAdmin = () => {
   const [aulas, setAulas] = useState([]);
   const [cursos, setCursos] = useState([]);
 
+  const [mensaje, setMensaje] = useState("");
+
+  const mostrarMensaje = (texto) => {
+    setMensaje(texto);
+    setTimeout(() => {
+      const mensajeDiv = document.querySelector(".mensaje-exito");
+      if (mensajeDiv) {
+        mensajeDiv.classList.add("oculto");
+      }
+    }, 2500);
+    setTimeout(() => {
+      setMensaje("");
+    }, 3000);
+  };
+
   useEffect(() => {
     fetchData();
     fetchDropdownData();
-  }, []);
+  },);
 
   const fetchData = async () => {
     try {
@@ -40,7 +55,7 @@ const CrudClasesAdmin = () => {
       setClases(res.data.clases);
     } catch (error) {
       console.error("Error al obtener clases", error);
-      alert("Error al obtener las clases");
+      mostrarMensaje("❌ Error al obtener las clases");
     }
   };
 
@@ -59,7 +74,7 @@ const CrudClasesAdmin = () => {
       setCursos(cursoRes.data.cursos);
     } catch (err) {
       console.error("Error cargando datos de select", err);
-      alert("Error al cargar datos de selección");
+      mostrarMensaje("❌ Error al cargar datos de selección");
     }
   };
 
@@ -92,20 +107,20 @@ const CrudClasesAdmin = () => {
           fecha: form.fecha,
         };
         await updateClase(form.id, dataToUpdate);
-        alert("Clase actualizada correctamente");
+        mostrarMensaje("✏️ Clase actualizada correctamente");
       } else {
         if (!form.dias.length) {
-          alert("Debes seleccionar al menos un día.");
+          mostrarMensaje("⚠️ Debes seleccionar al menos un día.");
           return;
         }
         await createClase(form);
-        alert("Clase registrada exitosamente");
+        mostrarMensaje("✅ Clase registrada exitosamente");
       }
       fetchData();
       resetForm();
     } catch (error) {
       console.error("Error al guardar clase", error.response?.data || error.message);
-      alert("Error al guardar la clase");
+      mostrarMensaje("❌ Error al guardar la clase");
     }
   };
 
@@ -117,7 +132,7 @@ const CrudClasesAdmin = () => {
       curso_id: clase.curso_id,
       hora_inicio: clase.hora_inicio,
       hora_fin: clase.hora_fin,
-      fecha: clase.fecha, // importante para edición
+      fecha: clase.fecha,
       fecha_inicio: "",
       fecha_fin: "",
       dias: [],
@@ -129,10 +144,10 @@ const CrudClasesAdmin = () => {
     try {
       await deleteClase(id);
       fetchData();
-      alert("Clase eliminada exitosamente");
+      mostrarMensaje("🗑️ Clase eliminada exitosamente");
     } catch (error) {
       console.error("Error al eliminar clase", error);
-      alert("Error al eliminar la clase");
+      mostrarMensaje("❌ Error al eliminar la clase");
     }
   };
 
@@ -164,10 +179,11 @@ const CrudClasesAdmin = () => {
 
   return (
     <div>
+      {mensaje && <div className="mensaje-exito">{mensaje}</div>}
+
       <h2>{form.id ? "Editar Clase" : "Registrar Nueva Clase"}</h2>
 
       <form onSubmit={handleSubmit}>
-        {/* Selects comunes */}
         <select
           name="asignatura_id"
           value={form.asignatura_id}
@@ -239,7 +255,6 @@ const CrudClasesAdmin = () => {
           required
         />
 
-        {/* Mostrar campos según si se edita o se registra */}
         {form.id ? (
           <input
             type="date"
@@ -264,7 +279,6 @@ const CrudClasesAdmin = () => {
               onChange={handleChange}
               required
             />
-
             <select
               name="dia"
               value={form.dias[0] || ""}
@@ -285,7 +299,6 @@ const CrudClasesAdmin = () => {
           </>
         )}
 
-        {/* Botones */}
         <div style={{ marginTop: "10px" }}>
           <button type="submit" style={{ marginRight: "10px" }}>
             {form.id ? "Actualizar Clase" : "Registrar Clase"}
@@ -302,7 +315,6 @@ const CrudClasesAdmin = () => {
           )}
         </div>
       </form>
-
 
       <table>
         <thead>

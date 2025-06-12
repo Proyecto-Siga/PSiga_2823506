@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./CrudAcudiente.css"; // Reutilizamos este estilo
+import "./CrudAcudiente.css"; 
 
 const CrudDocente = () => {
   const [docentes, setDocentes] = useState([]);

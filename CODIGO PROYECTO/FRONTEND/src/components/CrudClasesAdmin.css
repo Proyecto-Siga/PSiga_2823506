@@ -1,0 +1,15 @@
+.mensaje-exito {
+  background-color: #e0ffe0;
+  border: 1px solid #4caf50;
+  color: #2e7d32;
+  padding: 10px;
+  margin: 10px 0;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: opacity 0.5s;
+}
+
+.mensaje-exito.oculto {
+  opacity: 0;
+}
