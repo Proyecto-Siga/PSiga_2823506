@@ -17,11 +17,13 @@ const CrudClasesAdmin = () => {
     curso_id: "",
     hora_inicio: "",
     hora_fin: "",
-    fecha_inicio: "",
-    fecha_fin: "",
+    fecha: "", // solo para editar
+    fecha_inicio: "", // solo para registrar
+    fecha_fin: "", // solo para registrar
     dias: [],
     id: null,
   });
+
   const [asignaturas, setAsignaturas] = useState([]);
   const [docentes, setDocentes] = useState([]);
   const [aulas, setAulas] = useState([]);
@@ -35,7 +37,6 @@ const CrudClasesAdmin = () => {
   const fetchData = async () => {
     try {
       const res = await getClases();
-      console.log("📦 Clases recibidas:", res.data.clases);
       setClases(res.data.clases);
     } catch (error) {
       console.error("Error al obtener clases", error);
@@ -63,9 +64,9 @@ const CrudClasesAdmin = () => {
   };
 
   const handleChange = (e) => {
-    const { name, value, type: inputType, checked } = e.target;
+    const { name, value, type, checked } = e.target;
 
-    if (name === "dias" && inputType === "checkbox") {
+    if (name === "dias" && type === "checkbox") {
       setForm((prev) => ({
         ...prev,
         dias: checked
@@ -79,30 +80,31 @@ const CrudClasesAdmin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Formulario enviado:", form);
     try {
       if (form.id) {
-        await updateClase(form.id, form);
+        const dataToUpdate = {
+          asignatura_id: form.asignatura_id,
+          docente_id: form.docente_id,
+          aula_id: form.aula_id,
+          curso_id: form.curso_id,
+          hora_inicio: form.hora_inicio,
+          hora_fin: form.hora_fin,
+          fecha: form.fecha,
+        };
+        await updateClase(form.id, dataToUpdate);
         alert("Clase actualizada correctamente");
       } else {
-        await createClase(form.dias);
+        if (!form.dias.length) {
+          alert("Debes seleccionar al menos un día.");
+          return;
+        }
+        await createClase(form);
         alert("Clase registrada exitosamente");
       }
       fetchData();
-      setForm({
-        asignatura_id: "",
-        docente_id: "",
-        aula_id: "",
-        curso_id: "",
-        hora_inicio: "",
-        hora_fin: "",
-        fecha_inicio: "",
-        fecha_fin: "",
-        dias: [],
-        id: null,
-      });
+      resetForm();
     } catch (error) {
-      console.error("Error al guardar clase", error);
+      console.error("Error al guardar clase", error.response?.data || error.message);
       alert("Error al guardar la clase");
     }
   };
@@ -115,9 +117,10 @@ const CrudClasesAdmin = () => {
       curso_id: clase.curso_id,
       hora_inicio: clase.hora_inicio,
       hora_fin: clase.hora_fin,
-      fecha_inicio: clase.fecha_inicio,
-      fecha_fin: clase.fecha_fin,
-      dias: clase.dias || [],
+      fecha: clase.fecha, // importante para edición
+      fecha_inicio: "",
+      fecha_fin: "",
+      dias: [],
       id: clase.id,
     });
   };
@@ -133,6 +136,22 @@ const CrudClasesAdmin = () => {
     }
   };
 
+  const resetForm = () => {
+    setForm({
+      asignatura_id: "",
+      docente_id: "",
+      aula_id: "",
+      curso_id: "",
+      hora_inicio: "",
+      hora_fin: "",
+      fecha: "",
+      fecha_inicio: "",
+      fecha_fin: "",
+      dias: [],
+      id: null,
+    });
+  };
+
   const diasSemana = [
     "lunes",
     "martes",
@@ -143,13 +162,12 @@ const CrudClasesAdmin = () => {
     "domingo",
   ];
 
-  console.log("Asignaturas en el render:", asignaturas);
-  console.log("Aulas en el render:", aulas);
-
   return (
     <div>
-      <h2>{form.id ? "Editar Clase" : "Gestión de clases"}</h2>
+      <h2>{form.id ? "Editar Clase" : "Registrar Nueva Clase"}</h2>
+
       <form onSubmit={handleSubmit}>
+        {/* Selects comunes */}
         <select
           name="asignatura_id"
           value={form.asignatura_id}
@@ -220,45 +238,71 @@ const CrudClasesAdmin = () => {
           onChange={handleChange}
           required
         />
-        <input
-          type="date"
-          name="fecha_inicio"
-          value={form.fecha_inicio}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="date"
-          name="fecha_fin"
-          value={form.fecha_fin}
-          onChange={handleChange}
-          required
-        />
 
-        <div>
-          <select
-            name="dia"
-            value={form.dias[0] || ""}
-            onChange={(e) =>
-              setForm((prev) => ({
-                ...prev,
-                dias: [e.target.value],
-              }))
-            }
-          >
-            <option value="">Seleccionar día</option>
-            {diasSemana.map((dia) => (
-              <option key={dia} value={dia}>
-                {dia}
-              </option>
-            ))}
-          </select>
+        {/* Mostrar campos según si se edita o se registra */}
+        {form.id ? (
+          <input
+            type="date"
+            name="fecha"
+            value={form.fecha}
+            onChange={handleChange}
+            required
+          />
+        ) : (
+          <>
+            <input
+              type="date"
+              name="fecha_inicio"
+              value={form.fecha_inicio}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="date"
+              name="fecha_fin"
+              value={form.fecha_fin}
+              onChange={handleChange}
+              required
+            />
+
+            <select
+              name="dia"
+              value={form.dias[0] || ""}
+              onChange={(e) =>
+                setForm((prev) => ({
+                  ...prev,
+                  dias: [e.target.value],
+                }))
+              }
+            >
+              <option value="">Seleccionar día</option>
+              {diasSemana.map((dia) => (
+                <option key={dia} value={dia}>
+                  {dia}
+                </option>
+              ))}
+            </select>
+          </>
+        )}
+
+        {/* Botones */}
+        <div style={{ marginTop: "10px" }}>
+          <button type="submit" style={{ marginRight: "10px" }}>
+            {form.id ? "Actualizar Clase" : "Registrar Clase"}
+          </button>
+
+          {form.id && (
+            <button
+              type="button"
+              onClick={resetForm}
+              style={{ backgroundColor: "#ccc" }}
+            >
+              Cancelar edición
+            </button>
+          )}
         </div>
-
-        <button type="submit">
-          {form.id ? "Actualizar Clase" : "Registrar Clase"}
-        </button>
       </form>
+
 
       <table>
         <thead>
@@ -279,7 +323,7 @@ const CrudClasesAdmin = () => {
               <td>{clase.docente?.nombre || "N/A"}</td>
               <td>{clase.curso?.nombre || "N/A"}</td>
               <td>{clase.asignatura?.nombre_asignatura || "N/A"}</td>
-              <td>{clase.fecha_inicio}</td>
+              <td>{clase.fecha}</td>
               <td>
                 {clase.hora_inicio} - {clase.hora_fin}
               </td>
