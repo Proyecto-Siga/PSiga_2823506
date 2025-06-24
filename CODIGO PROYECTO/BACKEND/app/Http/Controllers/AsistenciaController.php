@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asistencia;
+use App\Models\Reporte;
+use App\Mail\ReporteFallasMail;
+use Illuminate\Support\Facades\Mail;
+use App\Models\Estudiante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -31,8 +35,42 @@ class AsistenciaController extends Controller
 
         ]);
 
+        // Desde acá empieza la lógica del reporte
+            if ($request->estado == 0) {
+        $estudianteId = $request->estudiante_id;
+
+        // 3. Contar cuántas fallas ha tenido este estudiante
+        $fallas = Asistencia::where('estudiante_id', $estudianteId)
+                            ->where('estado', 0)
+                            ->count();
+
+        // 4. Verificar si ya se ha creado un reporte para este número de fallas
+        $yaReportado = Reporte::where('estudiante_id', $estudianteId)
+                              ->where('fallas_acumuladas', $fallas)
+                              ->first();
+
+        if (!$yaReportado && $fallas % 3 === 0){
+            // 5. Obtener el correo del acudiente
+            $estudiante = Estudiante::with('acudiente')->find($estudianteId);
+            $correo = $estudiante->acudiente->correo;
+
+            // 6. Crear el reporte
+            Reporte::create([
+                'estudiante_id' => $estudianteId,
+                'correo' => $correo,
+                'fecha_reporte' => now()->toDateString(),
+                'fallas_acumuladas' => $fallas,
+            ]);
+            \Log::info("Enviando correo a $correo por $fallas fallas.");
+
+            // Envío del correo
+            Mail::to($correo)->send(new ReporteFallasMail($estudiante, $fallas));
+        }
+    }
+
         return response()->json(['message' => 'Asistencia registrada', 'asistencia' => $asistencia]);
     }
+
 
     public function obtenerPorClase($clase_id)
 {
