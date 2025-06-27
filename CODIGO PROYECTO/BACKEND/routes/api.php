@@ -14,7 +14,7 @@ use App\Http\Controllers\AulaController;
 use Illuminate\Support\Facades\Route;
 
 // Rutas para roles
-Route::post('/registrar-rol', [RolController::class, 'registrar']);
+Route::post('/registrar-rol', [RolController::class, 'registrar']); 
 Route::get('/obtener-roles', [RolController::class, 'index']);
 Route::put('/actualizar-rol/{id}', [RolController::class, 'update']);
 Route::patch('/actualizar-parcial-rol/{id}', [RolController::class, 'updatePartial']);
@@ -28,15 +28,15 @@ Route::patch('/actualizar-parcial-cursos/{id}', [CursoController::class, 'update
 Route::delete('/eliminar-cursos/{id}', [CursoController::class, 'destroy']);
 
 // Rutas para acudientes
-Route::post('/registrar-acudientes', [AcudienteController::class, 'registrar']);
-Route::get('/obtener-acudientes', [AcudienteController::class, 'index']);
-Route::put('/actualizar-acudientes/{id}', [AcudienteController::class, 'update']);
-Route::patch('/actualizar-parcial-acudientes/{id}', [AcudienteController::class, 'updatePartial']);
-Route::delete('/eliminar-acudientes/{id}', [AcudienteController::class, 'destroy']);
+Route::post('/registrar-acudientes', [AcudienteController::class, 'registrar'])->middleware('auth:api');
+Route::get('/obtener-acudientes', [AcudienteController::class, 'index'])->middleware('auth:api');
+Route::put('/actualizar-acudientes/{id}', [AcudienteController::class, 'update'])->middleware('auth:api');
+Route::patch('/actualizar-parcial-acudientes/{id}', [AcudienteController::class, 'updatePartial'])->middleware('auth:api');
+Route::delete('/eliminar-acudientes/{id}', [AcudienteController::class, 'destroy'])->middleware('auth:api');
 
 // Rutas para estudiantes
 Route::post('/registrar-estudiantes', [EstudianteController::class, 'registrar']);
-Route::get('/obtener-estudiantes', [EstudianteController::class, 'index']); 
+Route::get('/obtener-estudiantes', [EstudianteController::class, 'index']);
 Route::put('/actualizar-estudiantes/{id}', [EstudianteController::class, 'update']);
 Route::patch('/actualizar-parcial-estudiantes/{id}', [EstudianteController::class, 'updatePartial']);
 Route::delete('/eliminar-estudiantes/{id}', [EstudianteController::class, 'destroy']);
@@ -52,9 +52,9 @@ Route::delete('/eliminar-usuario/{id}', [AuthController::class, 'destroy']);
 
 // Rutas protegidas (requieren autenticación JWT)
 Route::middleware('jwt.auth')->group(function () {
-Route::post('/refrescar-token', [AuthController::class, 'refresh']);
-Route::post('/logout', [AuthController::class, 'logout']);
-Route::get('/perfil', [AuthController::class, 'profile']);
+    Route::post('/refrescar-token', [AuthController::class, 'refresh']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/perfil', [AuthController::class, 'profile']);
 });
 
 // Rutas para docentes
@@ -88,7 +88,7 @@ Route::patch('/actualizar-parcial-asignaturas/{id}', [AsignaturaController::clas
 Route::delete('/eliminar-asignaturas/{id}', [AsignaturaController::class, 'destroy']);
 
 //rutas para clases
-Route::post('/registrar-clases', [ClaseController::class, 'registrar']); 
+Route::post('/registrar-clases', [ClaseController::class, 'registrar']);
 Route::get('/obtener-clases', [ClaseController::class, 'index']);
 Route::put('/actualizar-clases/{id}', [ClaseController::class, 'update']);
 Route::patch('/actualizar-parcial-clases/{id}', [ClaseController::class, 'updatePartial']);
@@ -96,7 +96,7 @@ Route::delete('/eliminar-clases/{id}', [ClaseController::class, 'destroy']);
 Route::get('/clases-docente', [ClaseController::class, 'obtenerClaseDocente']);
 
 //rutas para asistencia
-Route::post('/marcar-asistencia', [AsistenciaController::class, 'registrar']); 
+Route::post('/marcar-asistencia', [AsistenciaController::class, 'registrar']);
 Route::get('/asistencias/{clase_id}', [AsistenciaController::class, 'obtenerPorClase']);
 Route::get('/clases-del-dia', [ClaseController::class, 'clasesDelDia']);
 

@@ -10,6 +10,7 @@ class AcudienteController extends Controller
 {
     public function registrar(Request $request)
     {
+        $acudiente = auth()->user();
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string',
@@ -31,19 +32,24 @@ class AcudienteController extends Controller
         return response()->json(['mensaje' => 'Acudiente registrado con éxito', 'acudiente' => $acudiente], 201);
     }
 
-    public function index() {
+    public function index()
+    {
+        $acudientes = auth()->user();
         $acudientes = Acudiente::all();
-        
+
         $data = [
             'acudientes' => $acudientes,
             'status' => 200
         ];
-        
-        return response()->json($data,200);
+
+        return response()->json($data, 200);
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
+        $acudiente = auth()->user();
         $acudiente = Acudiente::find($id);
+
 
         if (!$acudiente) {
             $data = [
@@ -81,7 +87,9 @@ class AcudienteController extends Controller
         return response()->json($data, 200);
     }
 
-    public function updatePartial(Request $request, $id) {
+    public function updatePartial(Request $request, $id)
+    {
+        $acudiente = auth()->user();
         $acudiente = Acudiente::find($id);
 
         if (!$acudiente) {
@@ -129,7 +137,9 @@ class AcudienteController extends Controller
         return response()->json($data, 200);
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
+        $acudiente = auth()->user();
         $acudiente = Acudiente::find($id);
 
         if (!$acudiente) {
