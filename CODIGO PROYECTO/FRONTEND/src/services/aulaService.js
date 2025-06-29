@@ -1,13 +1,12 @@
-import axios from 'axios';
+import api from "../api.js"; 
 
-const API_BASE_URL = 'http://localhost:8000/api';
 
-export const getAulas = () => axios.get(`${API_BASE_URL}/obtener-aulas`);
+export const getAulas = () => api.get(`/obtener-aulas`);
 
-export const createAula = (data) => axios.post(`${API_BASE_URL}/registrar-aulas`, data);
+export const createAula = (data) => api.post(`/registrar-aulas`, data);
 
-export const updateAula = (id, data) => axios.put(`${API_BASE_URL}/actualizar-aulas/${id}`, data);
+export const updateAula = (id, data) => api.put(`/actualizar-aulas/${id}`, data);
 
-export const updatePartialAula = (id, data) => axios.patch(`${API_BASE_URL}/actualizar-parcial-aulas/${id}`, data);
+export const updatePartialAula = (id, data) => api.patch(`/actualizar-parcial-aulas/${id}`, data);
 
-export const deleteAula = (id) => axios.delete(`${API_BASE_URL}/eliminar-aulas/${id}`);
+export const deleteAula = (id) => api.delete(`/eliminar-aulas/${id}`);

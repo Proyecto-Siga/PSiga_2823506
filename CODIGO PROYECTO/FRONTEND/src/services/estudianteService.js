@@ -1,6 +1,5 @@
-import axios from "axios";
-const API = "http://localhost:8000/api";
+import api from "../api.js"; 
 
 export const getEstudiantesPorCurso = (curso_id) => {
-  return axios.get(`${API}/estudiantes-curso/${curso_id}`);
+  return api.get(`/estudiantes-curso/${curso_id}`);
 };

@@ -66,13 +66,15 @@ const Login = () => {
             timer: 1000,
             timerProgressBar: true
           }).then(() => {
+            setTimeout(() => {
             navigate(ruta);
+}           , 100); // 100ms
           });
 
         } catch (perfilError) {
           console.error(perfilError);
           Swal.fire({
-            title: 'Error al obtener perfil',
+            title: 'Error al obtener perfila',
             text: 'Hubo un problema al verificar el rol del usuario.',
             icon: 'error',
           });

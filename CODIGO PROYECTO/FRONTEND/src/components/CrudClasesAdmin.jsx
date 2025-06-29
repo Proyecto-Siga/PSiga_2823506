@@ -5,7 +5,7 @@ import {
   deleteClase,
   updateClase,
 } from "../services/claseService";
-import axios from "axios";
+import api from "../api";
 import "./CrudClasesAdmin.css";
 
 const CrudClasesAdmin = () => {
@@ -62,10 +62,10 @@ const CrudClasesAdmin = () => {
   const fetchDropdownData = async () => {
     try {
       const [asigRes, docRes, aulaRes, cursoRes] = await Promise.all([
-        axios.get("http://localhost:8000/api/obtener-asignaturas"),
-        axios.get("http://localhost:8000/api/docentes"),
-        axios.get("http://localhost:8000/api/obtener-aulas"),
-        axios.get("http://localhost:8000/api/obtener-cursos"),
+        api.get("/obtener-asignaturas"),
+        api.get("/docentes"),
+        api.get("/obtener-aulas"),
+        api.get("/obtener-cursos"),
       ]);
 
       setAsignaturas(asigRes.data.asignaturas);

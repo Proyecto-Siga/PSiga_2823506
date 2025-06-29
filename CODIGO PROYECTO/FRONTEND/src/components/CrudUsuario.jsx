@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api";
 import "./CrudUsuario.css";
 
 function CrudUsuario() {
@@ -27,7 +27,7 @@ function CrudUsuario() {
   };
 
 
-  const apiUrl = "http://localhost:8000/api";
+
 
   useEffect(() => {
     obtenerUsuarios();
@@ -35,12 +35,12 @@ function CrudUsuario() {
   }, []);
 
   const obtenerUsuarios = async () => {
-    const res = await axios.get(`${apiUrl}/obtener-usuarios`);
+    const res = await api.get(`/obtener-usuarios`);
     setUsuarios(res.data.usuarios);
   };
 
   const obtenerRoles = async () => {
-    const res = await axios.get(`${apiUrl}/obtener-roles`);
+    const res = await api.get(`/obtener-roles`);
     setRoles(res.data.roles);
   };
 
@@ -53,7 +53,7 @@ function CrudUsuario() {
   };
 
   const registrar = async () => {
-    await axios.post(`${apiUrl}/registrar-usuario`, {
+    await api.post(`/registrar-usuario`, {
       correo,
       password,
       rol_id: rolId,
@@ -73,14 +73,14 @@ function CrudUsuario() {
       data.password = password;
     }
 
-    await axios.put(`${apiUrl}/actualizar-usuario/${idSeleccionado}`, data);
+    await api.put(`/actualizar-usuario/${idSeleccionado}`, data);
     obtenerUsuarios();
     limpiar();
     mostrarMensaje("✏️ Usuario actualizado correctamente");
   };
 
   const eliminar = async (id) => {
-    await axios.delete(`${apiUrl}/eliminar-usuario/${id}`);
+    await api.delete(`/eliminar-usuario/${id}`);
     obtenerUsuarios();
     mostrarMensaje("🗑️ Usuario eliminado");
   };

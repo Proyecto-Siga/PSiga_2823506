@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api";
 import "./CrudRol.css";
 
 function CrudRol() {
@@ -28,7 +28,7 @@ function CrudRol() {
 
   const obtenerRoles = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/obtener-roles");
+      const response = await api.get("/obtener-roles");
       setRoles(response.data.roles);
     } catch (error) {
       console.error("Error al obtener roles:", error);
@@ -37,7 +37,7 @@ function CrudRol() {
 
   const crearRol = async () => {
     try {
-      await axios.post("http://localhost:8000/api/registrar-rol", {
+      await api.post("/registrar-rol", {
         nombre,
         permisos: [],
       });
@@ -51,7 +51,7 @@ function CrudRol() {
 
   const actualizarRol = async () => {
     try {
-      await axios.put(`http://localhost:8000/api/actualizar-rol/${editandoRol.id}`, {
+      await api.put(`/actualizar-rol/${editandoRol.id}`, {
         nombre: editandoRol.nombre,
         permisos: editandoRol.permisos || [],
       });
@@ -65,7 +65,7 @@ function CrudRol() {
 
   const eliminarRol = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/api/eliminar-rol/${id}`);
+      await api.delete(`/eliminar-rol/${id}`);
       obtenerRoles();
       mostrarMensaje("🗑️ Rol eliminado");
     } catch (error) {

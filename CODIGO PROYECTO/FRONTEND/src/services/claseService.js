@@ -1,18 +1,15 @@
-import axios from 'axios';
+import api from "../api.js"; 
 
+export const getClases = () => api.get(`/obtener-clases`);
 
-const API = 'http://localhost:8000/api';
+export const createClase = (data) => api.post(`/registrar-clases`, data);
 
-export const getClases = () => axios.get(`${API}/obtener-clases`);
+export const updateClase = (id, data) => api.put(`/actualizar-clases/${id}`, data);
 
-export const createClase = (data) => axios.post(`${API}/registrar-clases`, data);
-
-export const updateClase = (id, data) => axios.put(`${API}/actualizar-clases/${id}`, data);
-
-export const deleteClase = (id) => axios.delete(`${API}/eliminar-clases/${id}`);
+export const deleteClase = (id) => api.delete(`/eliminar-clases/${id}`);
 
 export const buscarClaseDocente = (fecha, curso_id, asignatura_id, token) => {
-  return axios.get(`${API}/clases-docente`, {
+  return api.get(`/clases-docente`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -26,7 +23,7 @@ export const buscarClaseDocente = (fecha, curso_id, asignatura_id, token) => {
 
 // Nueva función para obtener clases del día para el docente logueado
 export const getClasesDelDia = (fecha, token) => {
-  return axios.get(`${API}/clases-del-dia`, {
+  return api.get(`/clases-del-dia`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

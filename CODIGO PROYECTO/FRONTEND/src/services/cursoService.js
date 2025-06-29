@@ -1,5 +1,4 @@
-import axios from "axios";
+import api from "../api.js"; 
 
-const API = "http://localhost:8000/api";
 
-export const obtenerCursos = () => axios.get(`${API}/obtener-cursos`);
+export const obtenerCursos = () => api.get(`/obtener-cursos`);

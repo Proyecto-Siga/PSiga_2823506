@@ -3,6 +3,8 @@ import { getClasesDelDia } from "../services/claseService";
 import { getAsistenciasPorClase } from "../services/asistenciaService";
 import { getEstudiantesPorCurso } from "../services/estudianteService";
 import "./Asistencia.css";
+import { marcarAsistencia } from "../services/asistenciaService";
+
 
 function Asistencia() {
   const [fecha, setFecha] = useState("");
@@ -24,8 +26,8 @@ function Asistencia() {
 
     const cargarClasesDelDia = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const res = await getClasesDelDia(fecha, token);
+        
+        const res = await getClasesDelDia(fecha);
         setClasesDelDia(res.data.clases);
       } catch (error) {
         console.error("Error al obtener clases:", error);
@@ -131,7 +133,7 @@ function Asistencia() {
               <form
                 onSubmit={async (e) => {
                   e.preventDefault();
-                  const token = localStorage.getItem("token");
+                  
 
                   try {
                     for (const estudiante_id of Object.keys(
@@ -139,17 +141,10 @@ function Asistencia() {
                     )) {
                       const estado = asistenciasFormulario[estudiante_id];
 
-                      await fetch("http://localhost:8000/api/marcar-asistencia", {
-                        method: "POST",
-                        headers: {
-                          "Content-Type": "application/json",
-                          Authorization: `Bearer ${token}`,
-                        },
-                        body: JSON.stringify({
-                          clase_id: resultado.id,
-                          estudiante_id,
-                          estado,
-                        }),
+                      await marcarAsistencia({
+                      clase_id: resultado.id,
+                      estudiante_id,
+                      estado,
                       });
                     }
 
