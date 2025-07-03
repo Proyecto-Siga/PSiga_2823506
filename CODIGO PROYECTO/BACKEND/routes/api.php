@@ -11,6 +11,7 @@ use App\Http\Controllers\AsignaturaController;
 use App\Http\Controllers\ClaseController;
 use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\AulaController;
+use App\Http\Controllers\ReporteController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/registrar-rol', [RolController::class, 'registrar']); 
@@ -105,4 +106,7 @@ Route::get('/asistencias/{clase_id}', [AsistenciaController::class, 'obtenerPorC
 Route::get('/clases-del-dia', [ClaseController::class, 'clasesDelDia']);
 });
 
-
+//Rutas para reporte
+Route::get('/obtener-reportes', [ReporteController::class, 'index']);
+Route::get('/reportes/{id}', [ReporteController::class, 'show']);
+Route::delete('/eliminar-reportes/{id}', [ReporteController::class, 'destroy']);

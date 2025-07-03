@@ -52,9 +52,17 @@ class AsistenciaController extends Controller
         if (!$yaReportado && $fallas % 3 === 0){
             // 5. Obtener el correo del acudiente
             $estudiante = Estudiante::with('acudiente')->find($estudianteId);
+            if ($estudiante && $estudiante->acudiente) {
             $correo = $estudiante->acudiente->correo;
+            } else {
+            \Log::warning("Estudiante sin acudiente: ID $estudianteId");
+            }
+
 
             // 6. Crear el reporte
+
+            \Log::info("📨 Reporte creado para estudiante ID: $estudianteId con $fallas fallas.");
+
             Reporte::create([
                 'estudiante_id' => $estudianteId,
                 'correo' => $correo,
