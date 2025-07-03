@@ -18,15 +18,12 @@ const ClaseCrud = () => {
     fetchClases();
   }, []);
 
-  // Función para formatear la fecha con el día de la semana en español
   const formatFechaConDia = (fechaStr) => {
-    const fecha = new Date(fechaStr);
+    const [anio, mes, dia] = fechaStr.split('-');
+    const fecha = new Date(anio, mes - 1, dia);
     const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
     const diaNombre = dias[fecha.getDay()];
-    const dia = String(fecha.getDate()).padStart(2, '0');
-    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
-    const anio = fecha.getFullYear();
-    return `${diaNombre}, ${dia}/${mes}/${anio}`;
+    return `${diaNombre}, ${dia.padStart(2, '0')}/${mes.padStart(2, '0')}/${anio}`;
   };
 
   return (
