@@ -6,6 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @OA\Schema(
+ *     schema="Rol",
+ *     title="Rol",
+ *     description="Modelo Rol con nombre y lista de permisos",
+ *     required={"nombre"},
+ *     @OA\Property(property="nombre", type="string", example="Rol prueba"),
+ *     
+ *     )
+ * )
+ */
+
+
 
 class Rol extends Model
 {
