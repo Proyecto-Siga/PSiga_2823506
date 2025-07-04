@@ -8,6 +8,29 @@ use Illuminate\Support\Facades\Validator;
 
 class AsignaturaController extends Controller
 {
+
+    /**
+ * @OA\Post(
+ *     path="/api/registrar-asignaturas",
+ *     summary="Registrar una asignatura",
+ *     tags={"Asignatura"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(ref="#/components/schemas/Asignatura")
+ *     ),
+ *     @OA\Response(
+ *         response=201,
+ *         description="Asignatura registrada con éxito"
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Error de validación"
+ *     )
+ * )
+ */
+
+
     public function registrar (Request $request)
     {
     
@@ -27,6 +50,20 @@ class AsignaturaController extends Controller
         return response()->json(['mensaje' => 'Asignatura registrada con éxito', 'asignatura' => $asignatura], 201);
 
     }
+
+    /**
+ * @OA\Get(
+ *     path="/api/obtener-asignaturas",
+ *     summary="Obtener todas las asignaturas",
+ *     tags={"Asignatura"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Response(
+ *         response=200,
+ *         description="Lista de asignaturas"
+ *     )
+ * )
+ */
+
     public function index() {
         $asignaturas = Asignatura::all();
         
@@ -37,6 +74,39 @@ class AsignaturaController extends Controller
         
         return response()->json($data,200);
     }
+
+    /**
+ * @OA\Put(
+ *     path="/api/actualizar-asignaturas/{id}",
+ *     summary="Actualizar completamente una asignatura",
+ *     tags={"Asignatura"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID de la asignatura",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(ref="#/components/schemas/Asignatura")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Asignatura actualizada con éxito"
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Error de validación"
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Asignatura no encontrada"
+ *     )
+ * )
+ */
+
     public function update(Request $request, $id) {
         $asignatura = Asignatura::find($id);
 
@@ -71,7 +141,42 @@ class AsignaturaController extends Controller
         return response()->json($data, 200);
 
     }
-    public function updatepartial($id) {
+
+    /**
+ * @OA\Patch(
+ *     path="/api/actualizar-parcial-asignaturas/{id}",
+ *     summary="Actualizar parcialmente una asignatura",
+ *     tags={"Asignatura"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID de la asignatura",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             @OA\Property(property="nombre_asignatura", type="string", example="Ciencias Naturales")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Asignatura actualizada parcialmente"
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Error de validación"
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Asignatura no encontrada"
+ *     )
+ * )
+ */
+
+    public function updatePartial($id) {
         $asignatura = Asignatura::find($id);
 
         if (!$asignatura) {
@@ -107,6 +212,31 @@ class AsignaturaController extends Controller
         ];
         return response()->json($data, 200);
     }
+
+    /**
+ * @OA\Delete(
+ *     path="/api/eliminar-asignaturas/{id}",
+ *     summary="Eliminar una asignatura",
+ *     tags={"Asignatura"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID de la asignatura",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Asignatura eliminada con éxito"
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Asignatura no encontrada"
+ *     )
+ * )
+ */
+
 
         public function destroy($id) {
             
