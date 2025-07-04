@@ -13,6 +13,26 @@ use Illuminate\Support\Facades\Validator;
 class AsistenciaController extends Controller
 {
    
+    /**
+ * @OA\Post(
+ *     path="/api/marcar-asistencia",
+ *     summary="Registrar asistencia de un estudiante a una clase",
+ *     tags={"Asistencias"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"clase_id", "estudiante_id", "estado"},
+ *             @OA\Property(property="clase_id", type="integer", example=1),
+ *             @OA\Property(property="estudiante_id", type="integer", example=5),
+ *             @OA\Property(property="estado", type="integer", example=0, description="0: falta, 1: presente")
+ *         )
+ *     ),
+ *     @OA\Response(response=200, description="Asistencia registrada correctamente"),
+ *     @OA\Response(response=400, description="Error de validación")
+ * )
+ */
+
     public function registrar (Request $request)
 
    {
@@ -79,6 +99,23 @@ class AsistenciaController extends Controller
         return response()->json(['message' => 'Asistencia registrada', 'asistencia' => $asistencia]);
     }
 
+    /**
+ * @OA\Get(
+ *     path="/api/asistencias/{clase_id}",
+ *     summary="Obtener asistencias de una clase específica",
+ *     tags={"Asistencias"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(
+ *         name="clase_id",
+ *         in="path",
+ *         required=true,
+ *         description="ID de la clase",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(response=200, description="Lista de asistencias de la clase"),
+ *     @OA\Response(response=404, description="Clase no encontrada")
+ * )
+ */
 
     public function obtenerPorClase($clase_id)
 {
