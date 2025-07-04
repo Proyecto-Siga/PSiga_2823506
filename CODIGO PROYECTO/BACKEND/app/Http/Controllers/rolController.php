@@ -8,6 +8,28 @@ use Illuminate\Support\Facades\Validator;
 
 class RolController extends Controller
 {
+
+    /**
+ * @OA\Post(
+ *     path="/api/registrar-rol",
+ *     summary="Registrar un nuevo rol",
+ *     tags={"Rol"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(ref="#/components/schemas/Rol")
+ *     ),
+ *     @OA\Response(
+ *         response=201,
+ *         description="Rol registrado con éxito"
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Error de validación"
+ *     )
+ * )
+ */
+
     public function registrar(Request $request)
     {
         // Validar los datos de entrada
@@ -28,6 +50,20 @@ class RolController extends Controller
 
         return response()->json(['mensaje' => 'Rol registrado con éxito', 'rol' => $rol], 201);
     }
+
+    /**
+ * @OA\Get(
+ *     path="/api/obtener-roles",
+ *     summary="Listar todos los roles",
+ *     tags={"Rol"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Response(
+ *         response=200,
+ *         description="Lista de roles obtenida exitosamente"
+ *     )
+ * )
+ */
+
     
     public function index() {
         $roles = Rol::all();
@@ -39,6 +75,36 @@ class RolController extends Controller
 
         return response()->json($data,200);
 }
+
+    /**
+ * @OA\Put(
+ *     path="/api/actualizar-rol/{id}",
+ *     summary="Actualizar completamente un rol",
+ *     tags={"Rol"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID del rol",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(ref="#/components/schemas/Rol")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Rol actualizado con éxito"
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Rol no encontrado"
+ *     )
+ * )
+ */
+
+
     public function update(Request $request, $id) {
         $rol = Rol::find($id);
 
@@ -75,6 +141,44 @@ class RolController extends Controller
         ];
         return response()->json($data, 200);
 }
+
+    /**
+ * @OA\Patch(
+ *     path="/api/actualizar-parcial-rol/{id}",
+ *     summary="Actualizar parcialmente un rol",
+ *     tags={"Rol"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID del rol",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\RequestBody(
+ *         required=false,
+ *         @OA\JsonContent(
+ *             @OA\Property(property="nombre", type="string", example="Editor"),
+ *             @OA\Property(
+ *                 property="permisos",
+ *                 type="array",
+ *                 @OA\Items(type="string"),
+ *                 example={"editar_cursos", "ver_estadisticas"}
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Rol actualizado parcialmente"
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Rol no encontrado"
+ *     )
+ * )
+ */
+
+
     public function updatePartial(Request $request, $id) {
         $rol = Rol::find($id);
 
@@ -117,6 +221,32 @@ class RolController extends Controller
         ];
         return response()->json($data, 200);
     }
+
+    /**
+ * @OA\Delete(
+ *     path="/api/eliminar-rol/{id}",
+ *     summary="Eliminar un rol",
+ *     tags={"Rol"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID del rol",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Rol eliminado con éxito"
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Rol no encontrado"
+ *     )
+ * )
+ */
+
+
     public function destroy($id) {
         $rol = Rol::find($id);
 
