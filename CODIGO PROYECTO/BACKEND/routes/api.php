@@ -14,14 +14,14 @@ use App\Http\Controllers\AulaController;
 use App\Http\Controllers\ReporteController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/registrar-rol', [RolController::class, 'registrar']); 
+
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/registrar-usuario', [AuthController::class, 'registrar']);
 
 Route::middleware('jwt.auth')->group(function () {
 
 //Rutas para roles
-
+Route::post('/registrar-rol', [RolController::class, 'registrar']); 
 Route::get('/obtener-roles', [RolController::class, 'index']);
 Route::put('/actualizar-rol/{id}', [RolController::class, 'update']);
 Route::patch('/actualizar-parcial-rol/{id}', [RolController::class, 'updatePartial']);
