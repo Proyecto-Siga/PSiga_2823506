@@ -8,6 +8,32 @@ use Illuminate\Support\Facades\Validator;
 
 class AulaController extends Controller
 {
+
+    /**
+ * @OA\Post(
+ *     path="/api/registrar-aulas",
+ *     tags={"Aulas"},
+ *     summary="Registrar un aula",
+ *     security={{"bearerAuth":{}}},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"nombre_aula"},
+ *             @OA\Property(property="nombre_aula", type="string", example="Aula 1501")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=201,
+ *         description="Aula registrada con éxito"
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Error de validación"
+ *     )
+ * )
+ */
+
+
     public function registrar(Request $request)
     {
         // Validar los datos de entrada
@@ -27,6 +53,19 @@ class AulaController extends Controller
         return response()->json(['mensaje' => 'Aula registrado con éxito', 'aula' => $aula], 201);
     }
 
+    /**
+ * @OA\Get(
+ *     path="/api/obtener-aulas",
+ *     tags={"Aulas"},
+ *     summary="Obtener todas las aulas",
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Response(
+ *         response=200,
+ *         description="Lista de aulas"
+ *     )
+ * )
+ */
+
     public function index() {
         $aulas = Aula::all();
         
@@ -37,6 +76,42 @@ class AulaController extends Controller
         
         return response()->json($data,200);
     }
+
+    /**
+ * @OA\Put(
+ *     path="/api/actualizar-aulas/{id}",
+ *     tags={"Aulas"},
+ *     summary="Actualizar un aula completamente",
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID del aula",
+ *         @OA\Schema(type="integer", example=1)
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"nombre_aula"},
+ *             @OA\Property(property="nombre_aula", type="string", example="Aula 102")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Aula actualizada con éxito"
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Error de validación"
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Aula no encontrada"
+ *     )
+ * )
+ */
+
     public function update(Request $request, $id) {
         $aula = Aula::find($id);
     
@@ -71,7 +146,41 @@ class AulaController extends Controller
         ];
         return response()->json($data, 200);
     }
-    
+
+    /**
+ * @OA\Patch(
+ *     path="/api/actualizar-parcial-aulas/{id}",
+ *     tags={"Aulas"},
+ *     summary="Actualizar parcialmente un aula",
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID del aula",
+ *         @OA\Schema(type="integer", example=1)
+ *     ),
+ *     @OA\RequestBody(
+ *         required=false,
+ *         @OA\JsonContent(
+ *             @OA\Property(property="nombre_aula", type="string", example="Aula 103")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Aula actualizada parcialmente"
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Error de validación"
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Aula no encontrada"
+ *     )
+ * )
+ */
+
     public function updatePartial(Request $request, $id) {
         $aula = Aula::find($id);
     
@@ -109,7 +218,31 @@ class AulaController extends Controller
         ];
         return response()->json($data, 200);
     }
-    
+
+    /**
+ * @OA\Delete(
+ *     path="/api/eliminar-aulas/{id}",
+ *     tags={"Aulas"},
+ *     summary="Eliminar un aula",
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID del aula",
+ *         @OA\Schema(type="integer", example=1)
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Aula eliminada con éxito"
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Aula no encontrada"
+ *     )
+ * )
+ */
+
     public function destroy($id) {
         $aula = Aula::find($id);
     
