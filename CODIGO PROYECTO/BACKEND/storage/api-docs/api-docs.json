@@ -1,0 +1,2627 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Laravel Proyecto SIGA (Sistema Integral de Gestión Académica)",
+        "description": "Esta API permite gestionar los procesos académicos y administrativos de una institución educativa.",
+        "contact": {
+            "name": "Soporte ",
+            "email": "stevencuellar98@hotmail.es"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/registrar-acudientes": {
+            "post": {
+                "tags": [
+                    "Acudiente"
+                ],
+                "summary": "Registrar un acudiente",
+                "operationId": "3623086e994ea30e2d00c692993b75d5",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Acudiente"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Acudiente registrado con éxito"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/obtener-acudientes": {
+            "get": {
+                "tags": [
+                    "Acudiente"
+                ],
+                "summary": "Obtener todos los acudientes",
+                "operationId": "da2a031da651df1b994ab2734a16368d",
+                "responses": {
+                    "200": {
+                        "description": "Lista de acudientes"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/actualizar-acudientes/{id}": {
+            "put": {
+                "tags": [
+                    "Acudiente"
+                ],
+                "summary": "Actualizar completamente un acudiente",
+                "operationId": "e3a48e5f0903fb57a4ae27eb02508fae",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del acudiente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Acudiente"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Acudiente actualizado"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    },
+                    "404": {
+                        "description": "Acudiente no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/actualizar-parcial-acudientes/{id}": {
+            "patch": {
+                "tags": [
+                    "Acudiente"
+                ],
+                "summary": "Actualizar parcialmente un acudiente",
+                "operationId": "9c3ad651ec5924ad337d3d79b7edfa6a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del acudiente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Carlos"
+                                    },
+                                    "apellido": {
+                                        "type": "string",
+                                        "example": "López"
+                                    },
+                                    "correo": {
+                                        "type": "string",
+                                        "example": "carlos.lopez@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Acudiente actualizado parcialmente"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    },
+                    "404": {
+                        "description": "Acudiente no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/eliminar-acudientes/{id}": {
+            "delete": {
+                "tags": [
+                    "Acudiente"
+                ],
+                "summary": "Eliminar un acudiente",
+                "operationId": "0897d5abebaca6318fa8260d636292e7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del acudiente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Acudiente eliminado con éxito"
+                    },
+                    "404": {
+                        "description": "Acudiente no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/administrativos": {
+            "get": {
+                "tags": [
+                    "Administrativo"
+                ],
+                "summary": "Listar todos los administrativos",
+                "operationId": "cd267cb62e8363f1967c972f961e9fe2",
+                "responses": {
+                    "200": {
+                        "description": "Lista de administrativos"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Administrativo"
+                ],
+                "summary": "Registrar un nuevo administrativo",
+                "operationId": "b192b7869eb85294060e01e4c0416ee6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Administrativo"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Administrativo creado exitosamente"
+                    },
+                    "400": {
+                        "description": "Usuario no válido o error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/administrativos/{id}": {
+            "put": {
+                "tags": [
+                    "Administrativo"
+                ],
+                "summary": "Actualizar un administrativo",
+                "operationId": "bd2076be4b56c8e72ce27d7079008107",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del administrativo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "apellido"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Carlos"
+                                    },
+                                    "apellido": {
+                                        "type": "string",
+                                        "example": "Ramírez"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Administrativo actualizado"
+                    },
+                    "404": {
+                        "description": "Administrativo no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Administrativo"
+                ],
+                "summary": "Eliminar un administrativo",
+                "operationId": "11de023f037a97220e1dde88236c9a02",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del administrativo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Administrativo eliminado con éxito"
+                    },
+                    "404": {
+                        "description": "Administrativo no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/usuarios-disponibles-administrativos": {
+            "get": {
+                "tags": [
+                    "Administrativo"
+                ],
+                "summary": "Obtener usuarios disponibles para ser administrativos",
+                "operationId": "ebeee36344d22e5893427740391920db",
+                "responses": {
+                    "200": {
+                        "description": "Usuarios disponibles obtenidos correctamente"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/registrar-asignaturas": {
+            "post": {
+                "tags": [
+                    "Asignatura"
+                ],
+                "summary": "Registrar una asignatura",
+                "operationId": "a43b498911464d07e78b05daa53f182c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Asignatura"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Asignatura registrada con éxito"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/obtener-asignaturas": {
+            "get": {
+                "tags": [
+                    "Asignatura"
+                ],
+                "summary": "Obtener todas las asignaturas",
+                "operationId": "a55c7e6a2bb96897eeec9fc7d542e815",
+                "responses": {
+                    "200": {
+                        "description": "Lista de asignaturas"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/actualizar-asignaturas/{id}": {
+            "put": {
+                "tags": [
+                    "Asignatura"
+                ],
+                "summary": "Actualizar completamente una asignatura",
+                "operationId": "f624cba3a7530d25a8a6a25b519190a1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la asignatura",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Asignatura"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Asignatura actualizada con éxito"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    },
+                    "404": {
+                        "description": "Asignatura no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/actualizar-parcial-asignaturas/{id}": {
+            "patch": {
+                "tags": [
+                    "Asignatura"
+                ],
+                "summary": "Actualizar parcialmente una asignatura",
+                "operationId": "a5a98e4cb100b3b914fb2f49bd553371",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la asignatura",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre_asignatura": {
+                                        "type": "string",
+                                        "example": "Ciencias Naturales"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Asignatura actualizada parcialmente"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    },
+                    "404": {
+                        "description": "Asignatura no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/eliminar-asignaturas/{id}": {
+            "delete": {
+                "tags": [
+                    "Asignatura"
+                ],
+                "summary": "Eliminar una asignatura",
+                "operationId": "5ed11ab233cca61e4cd6f37e48919e84",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la asignatura",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Asignatura eliminada con éxito"
+                    },
+                    "404": {
+                        "description": "Asignatura no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/marcar-asistencia": {
+            "post": {
+                "tags": [
+                    "Asistencias"
+                ],
+                "summary": "Registrar asistencia de un estudiante a una clase",
+                "operationId": "a7f7fcaeff0a8b4d7eb4b5626b72167d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "clase_id",
+                                    "estudiante_id",
+                                    "estado"
+                                ],
+                                "properties": {
+                                    "clase_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "estudiante_id": {
+                                        "type": "integer",
+                                        "example": 5
+                                    },
+                                    "estado": {
+                                        "description": "0: falta, 1: presente",
+                                        "type": "integer",
+                                        "example": 0
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Asistencia registrada correctamente"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/asistencias/{clase_id}": {
+            "get": {
+                "tags": [
+                    "Asistencias"
+                ],
+                "summary": "Obtener asistencias de una clase específica",
+                "operationId": "aa74da61c1b36508852f7bf78e804f82",
+                "parameters": [
+                    {
+                        "name": "clase_id",
+                        "in": "path",
+                        "description": "ID de la clase",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de asistencias de la clase"
+                    },
+                    "404": {
+                        "description": "Clase no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/registrar-aulas": {
+            "post": {
+                "tags": [
+                    "Aulas"
+                ],
+                "summary": "Registrar un aula",
+                "operationId": "e3650a2e0ba753738f417a6e57b0b304",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre_aula"
+                                ],
+                                "properties": {
+                                    "nombre_aula": {
+                                        "type": "string",
+                                        "example": "Aula 1501"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Aula registrada con éxito"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/obtener-aulas": {
+            "get": {
+                "tags": [
+                    "Aulas"
+                ],
+                "summary": "Obtener todas las aulas",
+                "operationId": "dba6027dee9d9eb873591ebdea3c719e",
+                "responses": {
+                    "200": {
+                        "description": "Lista de aulas"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/actualizar-aulas/{id}": {
+            "put": {
+                "tags": [
+                    "Aulas"
+                ],
+                "summary": "Actualizar un aula completamente",
+                "operationId": "f9a14bca2ffaf3fef3285c1f3a09c4c0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del aula",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre_aula"
+                                ],
+                                "properties": {
+                                    "nombre_aula": {
+                                        "type": "string",
+                                        "example": "Aula 102"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Aula actualizada con éxito"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    },
+                    "404": {
+                        "description": "Aula no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/actualizar-parcial-aulas/{id}": {
+            "patch": {
+                "tags": [
+                    "Aulas"
+                ],
+                "summary": "Actualizar parcialmente un aula",
+                "operationId": "7ebc5a224e61cbff1a8f8ef070f77120",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del aula",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre_aula": {
+                                        "type": "string",
+                                        "example": "Aula 103"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Aula actualizada parcialmente"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    },
+                    "404": {
+                        "description": "Aula no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/eliminar-aulas/{id}": {
+            "delete": {
+                "tags": [
+                    "Aulas"
+                ],
+                "summary": "Eliminar un aula",
+                "operationId": "d46127e27cf54694fa819128000888a4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del aula",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Aula eliminada con éxito"
+                    },
+                    "404": {
+                        "description": "Aula no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/registrar-usuario": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Registrar un nuevo usuario",
+                "operationId": "20b996254d19102239b9f8836dab3e3e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Usuario"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuario registrado con éxito"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Iniciar sesión",
+                "operationId": "a3b306d14572d1f4bd6c064b3233e7b8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "correo",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "correo": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "estiben@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "12345678"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token generado exitosamente"
+                    },
+                    "401": {
+                        "description": "Credenciales inválidas"
+                    }
+                }
+            }
+        },
+        "/api/obtener-usuarios": {
+            "get": {
+                "tags": [
+                    "Usuario"
+                ],
+                "summary": "Listar todos los usuarios",
+                "operationId": "44296320ef93db7e786b72372c2bb5c2",
+                "responses": {
+                    "200": {
+                        "description": "Lista de usuarios"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/refrescar-token": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Refrescar token JWT",
+                "operationId": "d89128161591eda3fac865ed43d84bc5",
+                "responses": {
+                    "200": {
+                        "description": "Nuevo token generado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/perfil": {
+            "get": {
+                "tags": [
+                    "Usuario"
+                ],
+                "summary": "Obtener perfil del usuario autenticado",
+                "operationId": "07b606e972e85969ecde5c5ad6704fa1",
+                "responses": {
+                    "200": {
+                        "description": "Perfil del usuario"
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Cerrar sesión",
+                "operationId": "fe8f3429cd6979b3b4517e186505f9f9",
+                "responses": {
+                    "200": {
+                        "description": "Sesión cerrada con éxito"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/actualizar-usuario/{id}": {
+            "put": {
+                "tags": [
+                    "Usuario"
+                ],
+                "summary": "Actualizar completamente un usuario",
+                "operationId": "8d2b56338c68ecffd64e0ba9e7f83943",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Usuario"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuario actualizado con éxito"
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/actualizar-parcial-usuario/{id}": {
+            "patch": {
+                "tags": [
+                    "Usuario"
+                ],
+                "summary": "Actualizar parcialmente un usuario",
+                "operationId": "3e099a6bfc606323ed88869c920eba54",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "correo": {
+                                        "type": "string",
+                                        "example": "nuevo@correo.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "12345678"
+                                    },
+                                    "rol_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuario actualizado parcialmente"
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/eliminar-usuario/{id}": {
+            "delete": {
+                "tags": [
+                    "Usuario"
+                ],
+                "summary": "Eliminar un usuario",
+                "operationId": "1430e825948c49a36a4fe17a32bb636f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario eliminado con éxito"
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/obtener-clases": {
+            "get": {
+                "tags": [
+                    "Clases"
+                ],
+                "summary": "Obtener todas las clases",
+                "operationId": "a3f080a584a521df40da49e51b24811c",
+                "responses": {
+                    "200": {
+                        "description": "Lista de clases"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/registrar-clases": {
+            "post": {
+                "tags": [
+                    "Clases"
+                ],
+                "summary": "Registrar clases recurrentes",
+                "operationId": "90c37e589f55c63f03e444a0aeb6cffd",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "asignatura_id",
+                                    "docente_id",
+                                    "aula_id",
+                                    "curso_id",
+                                    "hora_inicio",
+                                    "hora_fin",
+                                    "fecha_inicio",
+                                    "fecha_fin",
+                                    "dias"
+                                ],
+                                "properties": {
+                                    "asignatura_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "docente_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "aula_id": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "curso_id": {
+                                        "type": "integer",
+                                        "example": 4
+                                    },
+                                    "hora_inicio": {
+                                        "type": "string",
+                                        "example": "08:00"
+                                    },
+                                    "hora_fin": {
+                                        "type": "string",
+                                        "example": "09:00"
+                                    },
+                                    "fecha_inicio": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-07-01"
+                                    },
+                                    "fecha_fin": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-07-31"
+                                    },
+                                    "dias": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "example": "lunes"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Clases creadas correctamente"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    },
+                    "500": {
+                        "description": "Error del servidor al crear las clases"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/actualizar-clases/{id}": {
+            "put": {
+                "tags": [
+                    "Clases"
+                ],
+                "summary": "Actualizar una clase por ID",
+                "operationId": "8b5a50be6da23bb7680f705c8175e76b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la clase",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "asignatura_id",
+                                    "docente_id",
+                                    "aula_id",
+                                    "curso_id",
+                                    "fecha",
+                                    "hora_inicio",
+                                    "hora_fin"
+                                ],
+                                "properties": {
+                                    "asignatura_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "docente_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "aula_id": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "curso_id": {
+                                        "type": "integer",
+                                        "example": 4
+                                    },
+                                    "fecha": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-07-15"
+                                    },
+                                    "hora_inicio": {
+                                        "type": "string",
+                                        "example": "10:00"
+                                    },
+                                    "hora_fin": {
+                                        "type": "string",
+                                        "example": "11:00"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Clase actualizada correctamente"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    },
+                    "404": {
+                        "description": "Clase no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/actualizar-parcial-clases/{id}": {
+            "patch": {
+                "tags": [
+                    "Clases"
+                ],
+                "summary": "Actualizar parcialmente una clase",
+                "operationId": "6249e3b2be53c74d3f3bc550f87cf2c4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la clase",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "asignatura_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "docente_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "aula_id": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "curso_id": {
+                                        "type": "integer",
+                                        "example": 4
+                                    },
+                                    "fecha": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-07-20"
+                                    },
+                                    "hora_inicio": {
+                                        "type": "string",
+                                        "example": "13:00"
+                                    },
+                                    "hora_fin": {
+                                        "type": "string",
+                                        "example": "14:00"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Clase actualizada parcialmente"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    },
+                    "404": {
+                        "description": "Clase no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/eliminar-clases/{id}": {
+            "delete": {
+                "tags": [
+                    "Clases"
+                ],
+                "summary": "Eliminar una clase por ID",
+                "operationId": "b1a6a3bd672bb2b908c40f8f8c33f20e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la clase",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Clase eliminada correctamente"
+                    },
+                    "404": {
+                        "description": "Clase no encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/registrar-cursos": {
+            "post": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Registrar un nuevo curso",
+                "operationId": "fd2fa2b2eb8d895d2850d411897ebc26",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Octavo A"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Curso registrado con éxito"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/obtener-cursos": {
+            "get": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Obtener todos los cursos",
+                "operationId": "ac828903cc367308ecb8559977bac2da",
+                "responses": {
+                    "200": {
+                        "description": "Lista de cursos"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/actualizar-cursos/{id}": {
+            "put": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Actualizar un curso por ID",
+                "operationId": "f79cae5566cfb972fdb13c0a037bafea",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del curso",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Décimo B"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Curso actualizado con éxito"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    },
+                    "404": {
+                        "description": "Curso no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/actualizar-parcial-cursos/{id}": {
+            "patch": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Actualizar parcialmente un curso",
+                "operationId": "8e16474656fffc08e6da8b8faf890753",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del curso",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Noveno A"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Curso actualizado parcialmente"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    },
+                    "404": {
+                        "description": "Curso no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/eliminar-cursos/{id}": {
+            "delete": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Eliminar un curso por ID",
+                "operationId": "497ca833ad1de038fcef674e438a0901",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del curso",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Curso eliminado con éxito"
+                    },
+                    "404": {
+                        "description": "Curso no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/docentes": {
+            "get": {
+                "tags": [
+                    "Docente"
+                ],
+                "summary": "Listar todos los docentes",
+                "operationId": "b85ffdc9da338fc6fdaad61f940e2aef",
+                "responses": {
+                    "200": {
+                        "description": "Lista de docentes con sus usuarios"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Docente"
+                ],
+                "summary": "Registrar un nuevo docente",
+                "operationId": "8dcbf1c55f5d3d4b18b8a65047973c4c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Docente"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Docente creado exitosamente"
+                    },
+                    "400": {
+                        "description": "Error de validación o usuario ya asignado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/docentes/{id}": {
+            "put": {
+                "tags": [
+                    "Docente"
+                ],
+                "summary": "Actualizar un docente",
+                "operationId": "1e0be6fde94ea3bea7aadc7f24930e64",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del docente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "apellido"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Carlos"
+                                    },
+                                    "apellido": {
+                                        "type": "string",
+                                        "example": "Gómez"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Docente actualizado"
+                    },
+                    "404": {
+                        "description": "Docente no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Docente"
+                ],
+                "summary": "Eliminar un docente",
+                "operationId": "e155943689a25a5738dc8ba0f7ad00db",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del docente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Docente eliminado con éxito"
+                    },
+                    "404": {
+                        "description": "Docente no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/usuarios-disponibles-docentes": {
+            "get": {
+                "tags": [
+                    "Docente"
+                ],
+                "summary": "Obtener usuarios disponibles para docentes",
+                "operationId": "0237eebadeef00c74a1cabe5db5124f3",
+                "responses": {
+                    "200": {
+                        "description": "Lista de usuarios disponibles"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/registrar-estudiantes": {
+            "post": {
+                "tags": [
+                    "Estudiantes"
+                ],
+                "summary": "Registrar un nuevo estudiante",
+                "operationId": "0f30282538fd3f97cf18926f6551faab",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "apellido",
+                                    "acudiente_id",
+                                    "curso_id"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Juan"
+                                    },
+                                    "apellido": {
+                                        "type": "string",
+                                        "example": "Pérez"
+                                    },
+                                    "acudiente_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "curso_id": {
+                                        "type": "integer",
+                                        "example": 5
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Estudiante registrado con éxito"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/obtener-estudiantes": {
+            "get": {
+                "tags": [
+                    "Estudiantes"
+                ],
+                "summary": "Obtener todos los estudiantes",
+                "operationId": "afe93f2c1d59e626c298b663759c9b59",
+                "responses": {
+                    "200": {
+                        "description": "Lista de estudiantes"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/actualizar-parcial-estudiantes/{id}": {
+            "patch": {
+                "tags": [
+                    "Estudiantes"
+                ],
+                "summary": "Actualizar parcialmente un estudiante",
+                "operationId": "d9b39d35aad336450d6fec05a3628107",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del estudiante",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Carlos"
+                                    },
+                                    "apellido": {
+                                        "type": "string",
+                                        "example": "Mendoza"
+                                    },
+                                    "acudiente_id": {
+                                        "type": "integer",
+                                        "example": 4
+                                    },
+                                    "curso_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Estudiante actualizado parcialmente"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    },
+                    "404": {
+                        "description": "Estudiante no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/actualizar-estudiantes/{id}": {
+            "put": {
+                "tags": [
+                    "Estudiantes"
+                ],
+                "summary": "Actualizar un estudiante por ID",
+                "operationId": "00b1b4d9df50789689ac4d3486d7f7cd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del estudiante",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "apellido",
+                                    "acudiente_id",
+                                    "curso_id"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Laura"
+                                    },
+                                    "apellido": {
+                                        "type": "string",
+                                        "example": "Gómez"
+                                    },
+                                    "acudiente_id": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "curso_id": {
+                                        "type": "integer",
+                                        "example": 7
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Estudiante actualizado con éxito"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    },
+                    "404": {
+                        "description": "Estudiante no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/eliminar-estudiantes/{id}": {
+            "delete": {
+                "tags": [
+                    "Estudiantes"
+                ],
+                "summary": "Eliminar un estudiante por ID",
+                "operationId": "c39230f0adeb1c683d349204bb34ec1f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del estudiante",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Estudiante eliminado con éxito"
+                    },
+                    "404": {
+                        "description": "Estudiante no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/obtener-reportes": {
+            "get": {
+                "tags": [
+                    "Reportes"
+                ],
+                "summary": "Obtener todos los reportes",
+                "operationId": "7462ac336b07545cd365b75dbdc96110",
+                "responses": {
+                    "200": {
+                        "description": "Lista de reportes"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/reportes/{id}": {
+            "get": {
+                "tags": [
+                    "Reportes"
+                ],
+                "summary": "Obtener un reporte por ID",
+                "operationId": "25653ad638314a9e4580de79483d7633",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del reporte",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Reporte encontrado"
+                    },
+                    "404": {
+                        "description": "Reporte no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/eliminar-reportes/{id}": {
+            "delete": {
+                "tags": [
+                    "Reportes"
+                ],
+                "summary": "Eliminar un reporte por ID",
+                "operationId": "0a8afe7dbdde7bbde607560cdf2ee945",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del reporte",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Reporte eliminado"
+                    },
+                    "404": {
+                        "description": "Reporte no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/registrar-rol": {
+            "post": {
+                "tags": [
+                    "Rol"
+                ],
+                "summary": "Registrar un nuevo rol",
+                "operationId": "9f41485861c3e202cef3ec86ef8630a9",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Rol"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Rol registrado con éxito"
+                    },
+                    "400": {
+                        "description": "Error de validación"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/obtener-roles": {
+            "get": {
+                "tags": [
+                    "Rol"
+                ],
+                "summary": "Listar todos los roles",
+                "operationId": "a1f5699b7fb7ba120233a39de7393d9c",
+                "responses": {
+                    "200": {
+                        "description": "Lista de roles obtenida exitosamente"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/actualizar-rol/{id}": {
+            "put": {
+                "tags": [
+                    "Rol"
+                ],
+                "summary": "Actualizar completamente un rol",
+                "operationId": "5ae1302c20bfd69707bacbc2a15b22b6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del rol",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Rol"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Rol actualizado con éxito"
+                    },
+                    "404": {
+                        "description": "Rol no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/actualizar-parcial-rol/{id}": {
+            "patch": {
+                "tags": [
+                    "Rol"
+                ],
+                "summary": "Actualizar parcialmente un rol",
+                "operationId": "3e3a0646a0586d9ec4c224287a8ddfb5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del rol",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Editor"
+                                    },
+                                    "permisos": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": [
+                                            "editar_cursos",
+                                            "ver_estadisticas"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Rol actualizado parcialmente"
+                    },
+                    "404": {
+                        "description": "Rol no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/eliminar-rol/{id}": {
+            "delete": {
+                "tags": [
+                    "Rol"
+                ],
+                "summary": "Eliminar un rol",
+                "operationId": "55ca1976158d7d54610f539212e27148",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del rol",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Rol eliminado con éxito"
+                    },
+                    "404": {
+                        "description": "Rol no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Acudiente": {
+                "title": "Acudiente",
+                "description": "Modelo que representa un acudiente",
+                "required": [
+                    "nombre",
+                    "apellido",
+                    "correo"
+                ],
+                "properties": {
+                    "nombre": {
+                        "type": "string",
+                        "example": "Lucía"
+                    },
+                    "apellido": {
+                        "type": "string",
+                        "example": "Ramírez"
+                    },
+                    "correo": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "lucia.ramirez@example.com"
+                    }
+                },
+                "type": "object"
+            },
+            "Administrativo": {
+                "title": "Administrativo",
+                "description": "Modelo que representa a un administrativo",
+                "required": [
+                    "usuario_id",
+                    "nombre",
+                    "apellido"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "usuario_id": {
+                        "type": "integer",
+                        "example": 4
+                    },
+                    "nombre": {
+                        "type": "string",
+                        "example": "Juan"
+                    },
+                    "apellido": {
+                        "type": "string",
+                        "example": "Pérez"
+                    }
+                },
+                "type": "object"
+            },
+            "Asignatura": {
+                "title": "Asignatura",
+                "description": "Modelo que representa una asignatura",
+                "required": [
+                    "nombre_asignatura"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "nombre_asignatura": {
+                        "type": "string",
+                        "example": "Matemáticas"
+                    }
+                },
+                "type": "object"
+            },
+            "Asistencia": {
+                "title": "Asistencia",
+                "description": "Esquema del modelo Asistencia",
+                "required": [
+                    "clase_id",
+                    "estudiante_id",
+                    "estado"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "clase_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "estudiante_id": {
+                        "type": "integer",
+                        "example": 5
+                    },
+                    "estado": {
+                        "description": "0: falta, 1: presente",
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "Aula": {
+                "title": "Aula",
+                "description": "Modelo de Aula",
+                "required": [
+                    "nombre_aula"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "nombre_aula": {
+                        "type": "string",
+                        "example": "Aula 101"
+                    }
+                },
+                "type": "object"
+            },
+            "Curso": {
+                "title": "Curso",
+                "description": "Esquema del modelo Curso",
+                "required": [
+                    "nombre"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "nombre": {
+                        "type": "string",
+                        "example": "Octavo A"
+                    }
+                },
+                "type": "object"
+            },
+            "Docente": {
+                "title": "Docente",
+                "description": "Modelo que representa a un docente",
+                "required": [
+                    "usuario_id",
+                    "nombre",
+                    "apellido"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "usuario_id": {
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "nombre": {
+                        "type": "string",
+                        "example": "Laura"
+                    },
+                    "apellido": {
+                        "type": "string",
+                        "example": "Martínez"
+                    }
+                },
+                "type": "object"
+            },
+            "Estudiante": {
+                "title": "Estudiante",
+                "description": "Esquema del modelo Estudiante",
+                "required": [
+                    "nombre",
+                    "apellido",
+                    "acudiente_id",
+                    "curso_id"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "nombre": {
+                        "type": "string",
+                        "example": "Pedro"
+                    },
+                    "apellido": {
+                        "type": "string",
+                        "example": "García"
+                    },
+                    "acudiente_id": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "curso_id": {
+                        "type": "integer",
+                        "example": 3
+                    }
+                },
+                "type": "object"
+            },
+            "Reporte": {
+                "title": "Reporte",
+                "description": "Esquema del modelo Reporte",
+                "required": [
+                    "estudiante_id",
+                    "fecha_reporte",
+                    "correo",
+                    "fallas_acumuladas"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "estudiante_id": {
+                        "type": "integer",
+                        "example": 5
+                    },
+                    "fecha_reporte": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-07-04"
+                    },
+                    "correo": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "acudiente@correo.com"
+                    },
+                    "fallas_acumuladas": {
+                        "type": "integer",
+                        "example": 3
+                    }
+                },
+                "type": "object"
+            },
+            "Rol": {
+                "title": "Rol",
+                "description": "Modelo Rol con nombre y lista de permisos",
+                "required": [
+                    "nombre"
+                ],
+                "properties": {
+                    "nombre": {
+                        "type": "string",
+                        "example": "Rol prueba"
+                    }
+                },
+                "type": "object"
+            },
+            "Usuario": {
+                "title": "Usuario",
+                "description": "Esquema del modelo Usuario",
+                "required": [
+                    "correo",
+                    "password",
+                    "rol_id"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "correo": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "estiben@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "example": "12345678"
+                    },
+                    "rol_id": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "estado": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Autenticación",
+            "description": "Operaciones de login, registro y autenticación"
+        },
+        {
+            "name": "Usuario",
+            "description": "Gestión general de usuarios del sistema"
+        },
+        {
+            "name": "Rol",
+            "description": "Gestion de roles del sistema"
+        },
+        {
+            "name": "Administrativo",
+            "description": "Gestión de personal administrativo"
+        },
+        {
+            "name": "Docente",
+            "description": "Gestión de docentes y su información"
+        },
+        {
+            "name": "Estudiantes",
+            "description": "Gestión de estudiantes y sus datos"
+        },
+        {
+            "name": "Acudiente",
+            "description": "Gestion iformación de acudientes de los estudiantes"
+        },
+        {
+            "name": "Cursos",
+            "description": "Gestión de cursos académicos"
+        },
+        {
+            "name": "Asignatura",
+            "description": "Gestión de materias o asignaturas"
+        },
+        {
+            "name": "Clases",
+            "description": "Gestion de clases por curso/asignatura"
+        },
+        {
+            "name": "Aulas",
+            "description": "Gestión de aulas físicas o virtuales"
+        },
+        {
+            "name": "Asistencias",
+            "description": "Registro y control de asistencias"
+        },
+        {
+            "name": "Reportes",
+            "description": "Consultas y generación de reportes del sistema"
+        }
+    ]
+}

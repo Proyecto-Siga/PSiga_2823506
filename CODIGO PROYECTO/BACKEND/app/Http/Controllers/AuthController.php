@@ -27,7 +27,22 @@ use Illuminate\Support\Facades\Validator;
  *     scheme="bearer",
  *     bearerFormat="JWT"
  * )
+
+ * @OA\Tag(name="Autenticación", description="Operaciones de login, registro y autenticación"),
+ * @OA\Tag(name="Usuario", description="Gestión general de usuarios del sistema"),
+ * @OA\Tag(name="Rol", description="Gestion de roles del sistema"),
+ * @OA\Tag(name="Administrativo", description="Gestión de personal administrativo"),
+ * @OA\Tag(name="Docente", description="Gestión de docentes y su información"),
+ * @OA\Tag(name="Estudiantes", description="Gestión de estudiantes y sus datos"),
+ * @OA\Tag(name="Acudiente", description="Gestion iformación de acudientes de los estudiantes"),
+ * @OA\Tag(name="Cursos", description="Gestión de cursos académicos"),
+ * @OA\Tag(name="Asignatura", description="Gestión de materias o asignaturas"),
+ * @OA\Tag(name="Clases", description="Gestion de clases por curso/asignatura"),
+ * @OA\Tag(name="Aulas", description="Gestión de aulas físicas o virtuales"),
+ * @OA\Tag(name="Asistencias", description="Registro y control de asistencias"),
+ * @OA\Tag(name="Reportes", description="Consultas y generación de reportes del sistema")
  */
+
 
 
 class AuthController extends Controller
