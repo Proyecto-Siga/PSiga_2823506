@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api";
 import "./CrudAdministrativo.css";
 
 const CrudAdministrativo = () => {
@@ -35,7 +35,7 @@ const CrudAdministrativo = () => {
 
   const obtenerAdministrativos = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/administrativos");
+      const response = await api.get("/administrativos");
       setAdministrativos(response.data);
     } catch (error) {
       console.error("Error al obtener administrativos:", error);
@@ -44,7 +44,7 @@ const CrudAdministrativo = () => {
 
   const obtenerUsuariosDisponibles = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/usuarios-disponibles-administrativos");
+      const response = await api.get("/usuarios-disponibles-administrativos");
       setUsuariosDisponibles(response.data);
     } catch (error) {
       console.error("Error al obtener usuarios disponibles:", error);
@@ -53,7 +53,7 @@ const CrudAdministrativo = () => {
 
   const registrarAdministrativo = async () => {
     try {
-      await axios.post("http://localhost:8000/api/administrativos", nuevoAdministrativo);
+      await api.post("/administrativos", nuevoAdministrativo);
       setNuevoAdministrativo({ usuario_id: "", nombre: "", apellido: "" });
       obtenerAdministrativos();
       obtenerUsuariosDisponibles();
@@ -65,7 +65,7 @@ const CrudAdministrativo = () => {
 
   const actualizarAdministrativo = async (id) => {
     try {
-      await axios.put(`http://localhost:8000/api/administrativos/${id}`, nuevoAdministrativo);
+      await api.put(`/administrativos/${id}`, nuevoAdministrativo);
       setNuevoAdministrativo({ usuario_id: "", nombre: "", apellido: "" });
       setEditandoId(null);
       obtenerAdministrativos();
@@ -77,7 +77,7 @@ const CrudAdministrativo = () => {
 
   const eliminarAdministrativo = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/api/administrativos/${id}`);
+      await api.delete(`/administrativos/${id}`);
       obtenerAdministrativos();
       obtenerUsuariosDisponibles();
       mostrarMensaje("🗑️ Administrador eliminado");

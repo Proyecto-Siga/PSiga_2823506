@@ -8,6 +8,25 @@ use Illuminate\Support\Facades\Validator;
 
 class CursoController extends Controller
 {
+
+    /**
+ * @OA\Post(
+ *     path="/api/registrar-cursos",
+ *     summary="Registrar un nuevo curso",
+ *     tags={"Cursos"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"nombre"},
+ *             @OA\Property(property="nombre", type="string", example="Octavo A")
+ *         )
+ *     ),
+ *     @OA\Response(response=201, description="Curso registrado con éxito"),
+ *     @OA\Response(response=400, description="Error de validación")
+ * )
+ */
+
     public function registrar(Request $request)
     {
         // Validar los datos de entrada
@@ -26,6 +45,16 @@ class CursoController extends Controller
 
         return response()->json(['mensaje' => 'Curso registrado con éxito', 'curso' => $curso], 201);
     }
+    
+    /**
+ * @OA\Get(
+ *     path="/api/obtener-cursos",
+ *     summary="Obtener todos los cursos",
+ *     tags={"Cursos"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Response(response=200, description="Lista de cursos")
+ * )
+ */
 
     public function index() {
         $cursos = Curso::all();
@@ -37,6 +66,27 @@ class CursoController extends Controller
         
         return response()->json($data,200);
     }
+
+    /**
+ * @OA\Put(
+ *     path="/api/actualizar-cursos/{id}",
+ *     summary="Actualizar un curso por ID",
+ *     tags={"Cursos"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(name="id", in="path", required=true, description="ID del curso", @OA\Schema(type="integer")),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"nombre"},
+ *             @OA\Property(property="nombre", type="string", example="Décimo B")
+ *         )
+ *     ),
+ *     @OA\Response(response=200, description="Curso actualizado con éxito"),
+ *     @OA\Response(response=400, description="Error de validación"),
+ *     @OA\Response(response=404, description="Curso no encontrado")
+ * )
+ */
+
     public function update(Request $request, $id) {
         $curso = Curso::find($id);
     
@@ -71,7 +121,25 @@ class CursoController extends Controller
         ];
         return response()->json($data, 200);
     }
-    
+
+    /**
+ * @OA\Patch(
+ *     path="/api/actualizar-parcial-cursos/{id}",
+ *     summary="Actualizar parcialmente un curso",
+ *     tags={"Cursos"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(name="id", in="path", required=true, description="ID del curso", @OA\Schema(type="integer")),
+ *     @OA\RequestBody(
+ *         @OA\JsonContent(
+ *             @OA\Property(property="nombre", type="string", example="Noveno A")
+ *         )
+ *     ),
+ *     @OA\Response(response=200, description="Curso actualizado parcialmente"),
+ *     @OA\Response(response=400, description="Error de validación"),
+ *     @OA\Response(response=404, description="Curso no encontrado")
+ * )
+ */
+
     public function updatePartial(Request $request, $id) {
         $curso = Curso::find($id);
     
@@ -109,6 +177,19 @@ class CursoController extends Controller
         ];
         return response()->json($data, 200);
     }
+
+    /**
+ * @OA\Delete(
+ *     path="/api/eliminar-cursos/{id}",
+ *     summary="Eliminar un curso por ID",
+ *     tags={"Cursos"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(name="id", in="path", required=true, description="ID del curso", @OA\Schema(type="integer")),
+ *     @OA\Response(response=200, description="Curso eliminado con éxito"),
+ *     @OA\Response(response=404, description="Curso no encontrado")
+ * )
+ */
+
     
     public function destroy($id) {
         $curso = Curso::find($id);

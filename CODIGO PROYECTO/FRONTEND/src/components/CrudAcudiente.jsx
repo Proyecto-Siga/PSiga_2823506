@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api";
 import "./CrudAcudiente.css";
 
 function CrudAcudiente() {
@@ -33,7 +33,7 @@ function CrudAcudiente() {
 
   const obtenerAcudientes = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/obtener-acudientes");
+      const response = await api.get("/obtener-acudientes");
       setAcudientes(response.data.acudientes);
     } catch (error) {
       console.error("Error al obtener acudientes:", error);
@@ -49,7 +49,7 @@ function CrudAcudiente() {
 
   const registrarAcudiente = async () => {
     try {
-      await axios.post("http://localhost:8000/api/registrar-acudientes", formData);
+      await api.post("/registrar-acudientes", formData);
       setFormData({ nombre: "", apellido: "", correo: "" });
       obtenerAcudientes();
       mostrarMensaje("✅ Acudiente registrado con éxito");
@@ -60,7 +60,7 @@ function CrudAcudiente() {
 
   const actualizarAcudiente = async () => {
     try {
-      await axios.put(`http://localhost:8000/api/actualizar-acudientes/${editId}`, formData);
+      await api.put(`/actualizar-acudientes/${editId}`, formData);
       setEditId(null);
       setFormData({ nombre: "", apellido: "", correo: "" });
       obtenerAcudientes();
@@ -72,7 +72,7 @@ function CrudAcudiente() {
 
   const eliminarAcudiente = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/api/eliminar-acudientes/${id}`);
+      await api.delete(`/eliminar-acudientes/${id}`);
       obtenerAcudientes();
       mostrarMensaje("🗑️ Acudiente eliminado");
     } catch (error) {

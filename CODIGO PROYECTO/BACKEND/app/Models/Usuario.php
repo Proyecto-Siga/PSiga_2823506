@@ -8,6 +8,21 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * @OA\Schema(
+ *     schema="Usuario",
+ *     title="Usuario",
+ *     description="Esquema del modelo Usuario",
+ *     required={"correo", "password", "rol_id"},
+ *     @OA\Property(property="id", type="integer", example=1),
+ *     @OA\Property(property="correo", type="string", format="email", example="estiben@gmail.com"),
+ *     @OA\Property(property="password", type="string", format="password", example="12345678"),
+ *     @OA\Property(property="rol_id", type="integer", example=2),
+ *     @OA\Property(property="estado", type="integer", example=1)
+ * )
+ */
+
+
 class Usuario extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
@@ -17,15 +32,15 @@ class Usuario extends Authenticatable implements JWTSubject
     protected $fillable = ['rol_id','estado','correo','password'];
     protected $hidden = ['password'];
 
-    protected function rol(){
+    public function rol(){
         return $this->belongsTo(Rol::class);
     }
 
-    protected function docente(){
+    public function docente(){
         return $this->hasOne(Docente::class);
     }
 
-    protected function administrativo(){
+    public function administrativo(){
         return $this->hasOne(Administrativo::class);
     }
     

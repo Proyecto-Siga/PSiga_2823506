@@ -62,20 +62,19 @@ const Login = () => {
             imageWidth: 100,
             imageHeight: 100,
             imageAlt: 'Logo SIGA',
-            confirmButtonText: 'Entrar al sistema',
-            customClass: {
-              confirmButton: 'btn btn-success',
-              popup: 'p-4 rounded-4 shadow',
-            },
-            buttonsStyling: false,
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true
           }).then(() => {
+            setTimeout(() => {
             navigate(ruta);
+}           , 100); // 100ms
           });
 
         } catch (perfilError) {
           console.error(perfilError);
           Swal.fire({
-            title: 'Error al obtener perfil',
+            title: 'Error al obtener perfila',
             text: 'Hubo un problema al verificar el rol del usuario.',
             icon: 'error',
           });

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api";
 import "./CrudEstudiante.css";
 
 function CrudEstudiante() {
@@ -38,17 +38,17 @@ function CrudEstudiante() {
   }, []);
 
   const obtenerEstudiantes = async () => {
-    const response = await axios.get("http://localhost:8000/api/obtener-estudiantes");
+    const response = await api.get("/obtener-estudiantes");
     setEstudiantes(response.data.estudiantes);
   };
 
   const obtenerAcudientes = async () => {
-    const response = await axios.get("http://localhost:8000/api/obtener-acudientes");
+    const response = await api.get("/obtener-acudientes");
     setAcudientes(response.data.acudientes);
   };
 
   const obtenerCursos = async () => {
-    const response = await axios.get("http://localhost:8000/api/obtener-cursos");
+    const response = await api.get("/obtener-cursos");
     setCursos(response.data.cursos);
   };
 
@@ -57,14 +57,14 @@ function CrudEstudiante() {
   };
 
   const registrarEstudiante = async () => {
-    await axios.post("http://localhost:8000/api/registrar-estudiantes", formData);
+    await api.post("/registrar-estudiantes", formData);
     setFormData({ nombre: "", apellido: "", acudiente_id: "", curso_id: "" });
     obtenerEstudiantes();
     mostrarMensaje("✅ Estudiante registrado con éxito");
   };
 
   const actualizarEstudiante = async () => {
-    await axios.put(`http://localhost:8000/api/actualizar-estudiantes/${editId}`, formData);
+    await api.put(`/actualizar-estudiantes/${editId}`, formData);
     setEditId(null);
     setFormData({ nombre: "", apellido: "", acudiente_id: "", curso_id: "" });
     obtenerEstudiantes();
@@ -72,7 +72,7 @@ function CrudEstudiante() {
   };
 
   const eliminarEstudiante = async (id) => {
-    await axios.delete(`http://localhost:8000/api/eliminar-estudiantes/${id}`);
+    await api.delete(`/eliminar-estudiantes/${id}`);
     obtenerEstudiantes();
     mostrarMensaje("🗑️ Estudiante eliminado");
   };
@@ -93,7 +93,7 @@ function CrudEstudiante() {
     const acudiente = acudientes.find((a) => a.id === e.acudiente_id);
     const acudienteNombre = acudiente ? `${acudiente.nombre} ${acudiente.apellido}`.toLowerCase() : "";
     const acudienteMatch = acudienteNombre.includes(filtroAcudiente.toLowerCase());
-    const cursoMatch = filtroCurso === "" || e.curso_id == filtroCurso;
+    const cursoMatch = filtroCurso === "" || e.curso_id === filtroCurso;
     return apellidoMatch && acudienteMatch && cursoMatch;
   });
 

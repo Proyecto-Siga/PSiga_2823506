@@ -1,0 +1,8 @@
+node_modules/
+.cache/
+/vendor
+/storage
+/bootstrap/cache
+*.log
+*.cache
+

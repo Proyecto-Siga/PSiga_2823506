@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "./CrudAcudiente.css"; // Reutilizamos este estilo
+import api from "../api";
+import "./CrudAcudiente.css"; 
 
 const CrudDocente = () => {
   const [docentes, setDocentes] = useState([]);
@@ -35,7 +35,7 @@ const CrudDocente = () => {
 
   const obtenerDocentes = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/docentes");
+      const response = await api.get("/docentes");
       setDocentes(response.data);
     } catch (error) {
       console.error("Error al obtener docentes:", error);
@@ -44,8 +44,8 @@ const CrudDocente = () => {
 
   const obtenerUsuariosDisponibles = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8000/api/usuarios-disponibles-docentes"
+      const response = await api.get(
+        "/usuarios-disponibles-docentes"
       );
       setUsuariosDisponibles(response.data);
     } catch (error) {
@@ -55,7 +55,7 @@ const CrudDocente = () => {
 
   const registrarDocente = async () => {
     try {
-      await axios.post("http://localhost:8000/api/docentes", nuevoDocente);
+      await api.post("/docentes", nuevoDocente);
       setNuevoDocente({ usuario_id: "", nombre: "", apellido: "" });
       obtenerDocentes();
       obtenerUsuariosDisponibles();
@@ -67,7 +67,7 @@ const CrudDocente = () => {
 
   const actualizarDocente = async (id) => {
     try {
-      await axios.put(`http://localhost:8000/api/docentes/${id}`, nuevoDocente);
+      await api.put(`/docentes/${id}`, nuevoDocente);
       setNuevoDocente({ usuario_id: "", nombre: "", apellido: "" });
       setEditandoId(null);
       obtenerDocentes();
@@ -79,7 +79,7 @@ const CrudDocente = () => {
 
   const eliminarDocente = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/api/docentes/${id}`);
+      await api.delete(`/docentes/${id}`);
       obtenerDocentes();
       obtenerUsuariosDisponibles();
       mostrarMensaje("🗑️ Docente eliminado");

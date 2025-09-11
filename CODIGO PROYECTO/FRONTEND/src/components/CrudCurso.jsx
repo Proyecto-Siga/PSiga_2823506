@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from "../api";
 import './CrudCurso.css';
 
 const CrudCurso = () => {
@@ -24,7 +24,7 @@ const CrudCurso = () => {
 
   const obtenerCursos = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/obtener-cursos');
+      const response = await api.get('/obtener-cursos');
       setCursos(response.data.cursos);
     } catch (error) {
       console.error('Error al obtener cursos:', error);
@@ -38,11 +38,11 @@ const CrudCurso = () => {
   const registrarCurso = async () => {
     try {
       if (editandoId) {
-        await axios.put(`http://localhost:8000/api/actualizar-cursos/${editandoId}`, {
+        await api.put(`/actualizar-cursos/${editandoId}`, {
           nombre,
         });
       } else {
-        await axios.post('http://localhost:8000/api/registrar-cursos', { nombre });
+        await api.post('/registrar-cursos', { nombre });
       }
       setNombre('');
       setEditandoId(null);
@@ -61,7 +61,7 @@ const CrudCurso = () => {
 
   const eliminarCurso = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/api/eliminar-cursos/${id}`);
+      await api.delete(`/eliminar-cursos/${id}`);
       obtenerCursos();
       mostrarMensaje("🗑️ Curso eliminado");
     } catch (error) {

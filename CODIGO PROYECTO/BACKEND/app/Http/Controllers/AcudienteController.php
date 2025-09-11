@@ -8,8 +8,32 @@ use Illuminate\Support\Facades\Validator;
 
 class AcudienteController extends Controller
 {
+
+    /**
+ * @OA\Post(
+ *     path="/api/registrar-acudientes",
+ *     summary="Registrar un acudiente",
+ *     tags={"Acudiente"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(ref="#/components/schemas/Acudiente")
+ *     ),
+ *     @OA\Response(
+ *         response=201,
+ *         description="Acudiente registrado con éxito"
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Error de validación"
+ *     )
+ * )
+ */
+
+
     public function registrar(Request $request)
     {
+        $acudiente = auth()->user();
         // Validar los datos de entrada
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string',
@@ -31,19 +55,71 @@ class AcudienteController extends Controller
         return response()->json(['mensaje' => 'Acudiente registrado con éxito', 'acudiente' => $acudiente], 201);
     }
 
-    public function index() {
+    /**
+ * @OA\Get(
+ *     path="/api/obtener-acudientes",
+ *     summary="Obtener todos los acudientes",
+ *     tags={"Acudiente"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Response(
+ *         response=200,
+ *         description="Lista de acudientes"
+ *     )
+ * )
+ */
+
+
+    public function index()
+    {
+        $acudientes = auth()->user();
         $acudientes = Acudiente::all();
-        
+
         $data = [
             'acudientes' => $acudientes,
             'status' => 200
         ];
-        
-        return response()->json($data,200);
+
+        return response()->json($data, 200);
     }
 
-    public function update(Request $request, $id) {
+    /**
+ * @OA\Put(
+ *     path="/api/actualizar-acudientes/{id}",
+ *     summary="Actualizar completamente un acudiente",
+ *     tags={"Acudiente"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID del acudiente",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(ref="#/components/schemas/Acudiente")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Acudiente actualizado"
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Error de validación"
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Acudiente no encontrado"
+ *     )
+ * )
+ */
+
+
+    public function update(Request $request, $id)
+    {
+        $acudiente = auth()->user();
         $acudiente = Acudiente::find($id);
+
 
         if (!$acudiente) {
             $data = [
@@ -81,7 +157,46 @@ class AcudienteController extends Controller
         return response()->json($data, 200);
     }
 
-    public function updatePartial(Request $request, $id) {
+    /**
+ * @OA\Patch(
+ *     path="/api/actualizar-parcial-acudientes/{id}",
+ *     summary="Actualizar parcialmente un acudiente",
+ *     tags={"Acudiente"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID del acudiente",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             @OA\Property(property="nombre", type="string", example="Carlos"),
+ *             @OA\Property(property="apellido", type="string", example="López"),
+ *             @OA\Property(property="correo", type="string", example="carlos.lopez@example.com")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Acudiente actualizado parcialmente"
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Error de validación"
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Acudiente no encontrado"
+ *     )
+ * )
+ */
+
+
+    public function updatePartial(Request $request, $id)
+    {
+        $acudiente = auth()->user();
         $acudiente = Acudiente::find($id);
 
         if (!$acudiente) {
@@ -129,7 +244,34 @@ class AcudienteController extends Controller
         return response()->json($data, 200);
     }
 
-    public function destroy($id) {
+    /**
+ * @OA\Delete(
+ *     path="/api/eliminar-acudientes/{id}",
+ *     summary="Eliminar un acudiente",
+ *     tags={"Acudiente"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID del acudiente",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Acudiente eliminado con éxito"
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Acudiente no encontrado"
+ *     )
+ * )
+ */
+
+
+    public function destroy($id)
+    {
+        $acudiente = auth()->user();
         $acudiente = Acudiente::find($id);
 
         if (!$acudiente) {
