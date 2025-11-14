@@ -47,7 +47,7 @@ const CrudClasesAdmin = () => {
   useEffect(() => {
     fetchData();
     fetchDropdownData();
-  },);
+  },[]);
 
   const fetchData = async () => {
     try {
