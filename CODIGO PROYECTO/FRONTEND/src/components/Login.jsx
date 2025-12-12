@@ -15,7 +15,7 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:8000/api/login', {
+      const response = await fetch('http://127.0.0.1:8000/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ const Login = () => {
         localStorage.setItem('token', data.token);
 
         try {
-          const perfilResponse = await fetch('http://localhost:8000/api/perfil', {
+          const perfilResponse = await fetch('http://127.0.0.1:8000/api/perfil', {
             method: 'GET',
             headers: {
               Authorization: `Bearer ${data.token}`,

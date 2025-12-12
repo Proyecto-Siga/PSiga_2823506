@@ -16,7 +16,7 @@ const CrudReportes = () => {
 
   const obtenerReportes = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/api/obtener-reportes');
+      const res = await axios.get('http://127.0.0.1:8000/api/obtener-reportes');
       setReportes(res.data);
     } catch (error) {
       console.error('Error al obtener reportes', error);
@@ -28,7 +28,7 @@ const CrudReportes = () => {
 
   const eliminarReporte = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/api/eliminar-reportes/${id}`);
+      await axios.delete(`http://127.0.0.1:8000/api/eliminar-reportes/${id}`);
       setMensaje('✅ Reporte eliminado correctamente');
       obtenerReportes();
     } catch (error) {
